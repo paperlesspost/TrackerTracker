@@ -234,6 +234,10 @@ TT.Utils = (function () {
     return pub.exists(obj) ? JSON.parse(obj) : {};
   };
 
+  pub.returnFalse = function () {
+    return false;
+  };
+
   return pub;
 
 }());

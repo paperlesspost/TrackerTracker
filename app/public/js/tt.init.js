@@ -8,7 +8,6 @@ TT.Init = (function () {
   // bootstrap functions
 
   pub.preloadColumns = function () {
-
     // Readymade columns
     // TODO: Allow creating & saving custom columns and layouts
 
@@ -191,11 +190,6 @@ TT.Init = (function () {
   };
 
   pub.preloadFilters = function () {
-    var filters = TT.Model.Filter.clientLoad();
-    if (filters) {
-      pub.restoreFilters(JSON.parse(filters));
-    }
-
     if (TT.Model.Filter.isEmpty({ name: 'Owned by Me' })) {
       TT.Model.Filter.add({
         name: 'Owned by Me',
@@ -291,7 +285,9 @@ TT.Init = (function () {
     }
   };
 
-  pub.restoreFilters = function (filters) {
+  pub.restoreFilters = function () {
+    var filters = TT.Model.Filter.clientLoad();
+
     $.each(filters, function (index, filter) {
       if (filter.pure) {
         filter.fn = eval(filter.fn);
@@ -345,10 +341,6 @@ TT.Init = (function () {
       };
     });
     var savedLayout = TT.Model.Layout.clientLoad();
-
-    if (savedLayout) {
-      savedLayout = JSON.parse(savedLayout);
-    }
 
     // reset when columns are updated
     if (savedLayout && savedLayout.length !== defaultLayout.length) {
@@ -499,6 +491,32 @@ TT.Init = (function () {
     });
   };
 
+  pub.workspaceRefresh = function () {
+    $('#filters .filter').remove();
+    $('#projects .projects').remove();
+
+    TT.Model.Column.flush();
+    TT.Model.Filter.flush();
+    TT.Model.Layout.flush();
+
+    TT.Workspace.preload();
+
+    pub.preloadColumns();
+    pub.restoreFilters();
+    pub.preloadFilters();
+    pub.setLayout();
+
+    TT.View.drawColumns();
+    TT.View.drawColumnListNav();
+    TT.View.updateColumnDimensions();
+
+    var projects = TT.Utils.localStorage('projects') || {};
+    TT.View.drawProjectList(JSON.parse(projects).project);
+    pub.setInactiveProjects();
+
+    TT.View.drawStories();
+  };
+
   pub.init = function () {
     if (pub.firstRun) {
       TT.View.drawPageLayout();
@@ -512,7 +530,10 @@ TT.Init = (function () {
       $('#projects .projects').remove();
     }
 
+    TT.Workspace.preload();
+
     pub.preloadColumns();
+    pub.restoreFilters();
     pub.preloadFilters();
     pub.setLayout();
 

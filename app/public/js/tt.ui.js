@@ -222,6 +222,12 @@ TT.UI = (function () {
   };
 
   pub.openProjectListAutocomplete = function () {
+    if ($('#autocomplete .project-controls').length > 0) {
+      TT.Autocomplete.close();
+
+      return false;
+    }
+
     var items = [];
 
     TT.Model.Project.each(function (index, project) {
