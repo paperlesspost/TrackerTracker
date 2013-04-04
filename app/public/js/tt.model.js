@@ -384,7 +384,7 @@ TT.Model = (function () {
       });
     }
 
-    return TT.Utils.sortByProperty(story.notes, 'timestamp').reverse();
+    return TT.Utils.sortByProperty(story.notes, 'timestamp');
   }
 
   pub.Story.onBeforeSave = function (data) {
