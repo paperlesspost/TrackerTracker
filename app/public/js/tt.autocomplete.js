@@ -7,7 +7,8 @@ TT.Autocomplete = (function () {
     applyOnClick: true,
     closeOnInputBlur: true,
     closeOnApply: true,
-    maxHeight: 240
+    maxHeight: 240,
+    noActive: false
   };
   pub.options = {};
 

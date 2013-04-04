@@ -247,6 +247,7 @@ body.ajaxRunning #logo h1 {
   text-decoration: underline;
 }
 
+#workspace-dropdown,
 #projects-dropdown {
   background: url(/images/arrow.down.white.png) right center no-repeat transparent;
   padding-right: 16px;
@@ -1710,4 +1711,28 @@ body.fullscreen .story .summary .story-owner,
 body.fullscreen .story .summary .story-pair,
 body.fullscreen .story .summary .story-qa {
     font: bold 14px/18px Helvetica, sans-serif;
+}
+
+/* Workspaces */
+
+#autocomplete .save-new-workspace input {
+  width: 166px;
+}
+
+#autocomplete .save-new-workspace a.action {
+  line-height: 29px;
+  margin: 0 0 0 2px;
+  padding: 0 12px;
+  position: relative;
+  top: -3px;
+}
+
+#autocomplete span.delete-workspace {
+  background: url(/images/trash.png) no-repeat scroll 0 0 transparent;
+  float: right;
+  height: 16px;
+  left: 2px;
+  position: relative;
+  top: -1px;
+  width: 16px;
 }

@@ -491,6 +491,32 @@ TT.Init = (function () {
     });
   };
 
+  pub.workspaceRefresh = function () {
+    $('#filters .filter').remove();
+    $('#projects .projects').remove();
+
+    TT.Model.Column.flush();
+    TT.Model.Filter.flush();
+    TT.Model.Layout.flush();
+
+    TT.Workspace.preload();
+
+    pub.preloadColumns();
+    pub.restoreFilters();
+    pub.preloadFilters();
+    pub.setLayout();
+
+    TT.View.drawColumns();
+    TT.View.drawColumnListNav();
+    TT.View.updateColumnDimensions();
+
+    var projects = TT.Utils.localStorage('projects') || {};
+    TT.View.drawProjectList(JSON.parse(projects).project);
+    pub.setInactiveProjects();
+
+    TT.View.drawStories();
+  };
+
   pub.init = function () {
     if (pub.firstRun) {
       TT.View.drawPageLayout();
@@ -503,6 +529,8 @@ TT.Init = (function () {
       $('#filters .filter').remove();
       $('#projects .projects').remove();
     }
+
+    TT.Workspace.preload();
 
     pub.preloadColumns();
     pub.restoreFilters();
