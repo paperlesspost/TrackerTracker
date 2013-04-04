@@ -86,7 +86,8 @@ TT.Model = (function () {
     };
 
     self.clientLoad = function () {
-      return TT.Utils.localStorage(self.name);
+      var data = TT.Utils.localStorage(self.name);
+      return data ? JSON.parse(data) : false;
     };
 
     self.find = function (query, returnIndex) {
