@@ -1688,6 +1688,20 @@ a.teamcity-failed {
 
 /* Fullscreen */
 
+body.fullscreen {
+  background: #666;
+}
+
+body.fullscreen #fullscreen-link {
+  background: #fff;
+  padding: 2px 3px;
+  color: #069;
+}
+
+body.fullscreen #fullscreen-link:hover {
+  text-decoration: none;
+}
+
 body.fullscreen #nav,
 body.fullscreen #projects {
   display: none;
@@ -1697,11 +1711,69 @@ body.fullscreen #header {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+body.fullscreen .column {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+body.fullscreen .column-title {
+  background: #333;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 6px 8px;
+}
+
+body.fullscreen .empty-column .column-title {
+  background: #444;
+}
+
+body.fullscreen .column-title span {
+  display: none;
+}
+
+body.fullscreen .column-bucket {
+  background: transparent;
+}
+
 body.fullscreen .story {
-  background-position: -999px -999px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1px;
-  padding: 11px 10px 12px 18px;
+  background-position: 14px 15px;
+  border: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin-bottom: 4px;
+  padding: 12px 22px 12px 14px;
+  text-indent: 20px;
+}
+
+body.fullscreen .story .summary .tag {
+  display: none;
+}
+
+body.fullscreen .story .points {
+  color: #444;
+  font-size: 11px;
+  position: absolute;
+  right: 7px;
+  text-indent: 0;
+  top: 8px;
+}
+
+body.fullscreen .story .project-name {
+  bottom: 4px;
+  font-size: 12px;
+  padding: 0;
+  position: absolute;
+  right: 9px;
+  text-indent: 0;
+}
+
+body.fullscreen .story .owners {
+  color: #777;
+  display: block;
+  font-size: 14px;
+  position: relative;
+  text-indent: 0;
+  top: 2px;
 }
 
 body.fullscreen .expanded-story {
@@ -1709,8 +1781,7 @@ body.fullscreen .expanded-story {
 }
 
 body.fullscreen .story .toggle-arrow {
-  left: 4px;
-  top: 14px;
+  display: none;
 }
 
 body.fullscreen .story .title {
@@ -1720,7 +1791,7 @@ body.fullscreen .story .title {
 body.fullscreen .story .summary .story-owner,
 body.fullscreen .story .summary .story-pair,
 body.fullscreen .story .summary .story-qa {
-    font: bold 14px/18px Helvetica, sans-serif;
+  font: bold 14px/18px Helvetica, sans-serif;
 }
 
 /* Workspaces */

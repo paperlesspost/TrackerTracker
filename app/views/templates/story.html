@@ -6,15 +6,17 @@
     <div class="title">
       <a href="#" data-project-id="{{project_id}}" data-project-name="{{project_name}}" data-click-handler="TT.UI.filterByProject" data-hover-handler="TT.UI.storyProjectTooltip" class="project-name project-{{project_classname}}">{{project_initials}}</a>
       {{{formatted_name}}}
-      {{#initials}}
-        <a href="#" class="story-owner" data-username="{{owned_by}}" data-click-handler="TT.UI.filterByUser" data-hover-handler="TT.UI.storyOwnerTooltip">{{initials}}</a>
-      {{/initials}}
-      {{#pair}}
-        / <a href="#" class="story-pair" data-username="{{pair}}" data-click-handler="TT.UI.filterByUser" data-hover-handler="TT.UI.storyPairTooltip">{{pair_initials}}</a>
-      {{/pair}}
-      {{#qa}}
-        / <a href="#" class="story-qa" data-username="{{qa}}" data-click-handler="TT.UI.filterByUser" data-hover-handler="TT.UI.storyQATooltip">{{qa_initials}}</a>
-      {{/qa}}
+      <span class="owners">
+        {{#initials}}
+          <a href="#" class="story-owner" data-username="{{owned_by}}" data-click-handler="TT.UI.filterByUser" data-hover-handler="TT.UI.storyOwnerTooltip">{{initials}}</a>
+        {{/initials}}
+        {{#pair}}
+          / <a href="#" class="story-pair" data-username="{{pair}}" data-click-handler="TT.UI.filterByUser" data-hover-handler="TT.UI.storyPairTooltip">{{pair_initials}}</a>
+        {{/pair}}
+        {{#qa}}
+          / <a href="#" class="story-qa" data-username="{{qa}}" data-click-handler="TT.UI.filterByUser" data-hover-handler="TT.UI.storyQATooltip">{{qa_initials}}</a>
+        {{/qa}}
+      </span>
       {{#labels}}
         <div class="tag" data-click-handler="TT.UI.filterByTag">{{.}}</div>
       {{/labels}}
