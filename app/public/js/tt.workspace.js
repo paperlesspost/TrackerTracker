@@ -120,13 +120,20 @@ TT.Workspace = (function () {
     $('#workspace-dropdown').text(pub.getCurrentWorkspace());
   };
 
+  pub.loadWorkspaceByID = function (id) {
+    var workspace = TT.Model.Workspace.get()[id];
+    if (workspace && workspace.name) {
+      pub.loadWorkspace(workspace.name);
+    }
+  };
+
   pub.init = function () {
     $(window).bind('keyup', function (e) {
-      if (e && (e.which >= 49 && e.which <= 57)) {
-        var id = e.which - 49;
-        var workspace = TT.Model.Workspace.get()[id];
-        if (workspace && workspace.name) {
-          pub.loadWorkspace(workspace.name);
+      if (e && e.which) {
+        if (e.which >= 49 && e.which <= 57) {
+          pub.loadWorkspaceByID(e.which - 49);
+        } else if (e.which >= 97 && e.which <= 105) {
+          pub.loadWorkspaceByID(e.which - 97);
         }
       }
     });
