@@ -1024,7 +1024,17 @@ body.has-modal-dialog {
 .story.inqa:hover,
 .story.passedqa:hover,
 .story.delivered:hover {
-  background-color: #fff8e8;
+  background-color: #fffcf4;
+}
+
+.column-rejected .story,
+.story.rejected {
+  background-color: #fdd;
+}
+
+.column-rejected .story:hover,
+.story.rejected:hover {
+  background-color: #fee;
 }
 
 .column-accepted .story,
