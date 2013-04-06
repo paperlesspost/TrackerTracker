@@ -134,6 +134,9 @@ TT.Workspace = (function () {
           pub.loadWorkspaceByID(e.which - 49);
         } else if (e.which >= 97 && e.which <= 105) {
           pub.loadWorkspaceByID(e.which - 97);
+        } else if (e.which === 192) {
+          // `~ key
+          $('#fullscreen-link').click();
         }
       }
     });
