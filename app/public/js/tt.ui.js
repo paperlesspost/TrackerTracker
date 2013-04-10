@@ -31,6 +31,7 @@ TT.UI = (function () {
   pub.toggleFullscreen = function () {
     $('body').toggleClass('fullscreen');
     TT.View.updateColumnDimensions();
+    TT.Utils.localStorage('fullscreen', $('body').hasClass('fullscreen'));
 
     return false;
   };

@@ -539,6 +539,9 @@ TT.Init = (function () {
       pub.moduleInit();
       pub.setUpdateInterval();
       pub.initMarked();
+      if (TT.Utils.localStorage('fullscreen') === 'true') {
+        TT.UI.toggleFullscreen();
+      }
     }
 
     if ($.cookie('pivotalToken')) {
