@@ -491,13 +491,9 @@ TT.Init = (function () {
     });
   };
 
-  pub.workspaceRefresh = function () {
+  pub.resetUI = function () {
     $('#filters .filter').remove();
     $('#projects .projects').remove();
-
-    TT.Model.Column.flush();
-    TT.Model.Filter.flush();
-    TT.Model.Layout.flush();
 
     TT.Workspace.preload();
 
@@ -509,6 +505,14 @@ TT.Init = (function () {
     TT.View.drawColumns();
     TT.View.drawColumnListNav();
     TT.View.updateColumnDimensions();
+  };
+
+  pub.workspaceRefresh = function () {
+    TT.Model.Column.flush();
+    TT.Model.Filter.flush();
+    TT.Model.Layout.flush();
+
+    pub.resetUI();
 
     var projects = TT.Utils.localStorage('projects') || {};
     TT.View.drawProjectList(JSON.parse(projects).project);
@@ -526,20 +530,9 @@ TT.Init = (function () {
           model.flush();
         }
       });
-      $('#filters .filter').remove();
-      $('#projects .projects').remove();
     }
 
-    TT.Workspace.preload();
-
-    pub.preloadColumns();
-    pub.restoreFilters();
-    pub.preloadFilters();
-    pub.setLayout();
-
-    TT.View.drawColumns();
-    TT.View.drawColumnListNav();
-    TT.View.updateColumnDimensions();
+    pub.resetUI();
 
     if (pub.firstRun) {
       $(window).resize(TT.View.updateColumnDimensions);
