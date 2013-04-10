@@ -38,6 +38,7 @@ TT.UI = (function () {
 
   pub.selectProject = function () {
     $(this).toggleClass('inactive');
+    $(window).trigger('workspaceUpdate');
     TT.View.drawStories();
 
     return false;
@@ -60,6 +61,7 @@ TT.UI = (function () {
 
   pub.toggleColumnSelector = function () {
     var name = $(this).data('name');
+    $(window).trigger('workspaceUpdate');
 
     if ($(this).hasClass('active')) {
       TT.View.removeColumn(name);
@@ -73,6 +75,7 @@ TT.UI = (function () {
   pub.removeColumn = function () {
     var name = $(this).closest('.column').data('name');
     TT.View.removeColumn(name);
+    $(window).trigger('workspaceUpdate');
 
     return false;
   };
@@ -166,6 +169,7 @@ TT.UI = (function () {
 
     TT.Model.Filter.update({ id: id }, { active: !filter.active });
     $(this).toggleClass('inactive');
+    $(window).trigger('workspaceUpdate');
     TT.View.drawStories();
     TT.Model.Filter.clientSave();
 

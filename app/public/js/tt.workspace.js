@@ -142,6 +142,8 @@ TT.Workspace = (function () {
           $('#fullscreen-link').click();
         }
       }
+    }).bind('workspaceUpdate', function () {
+      pub.setCurrentWorkspace('Custom Workspace');
     });
   };
 
