@@ -230,14 +230,14 @@ body.ajaxRunning #logo h1 {
 
 #account {
   position: absolute;
-  right: 22px;
-  top: 11px;
+  right: 16px;
+  top: 7px;
 }
 
 #account a {
   color: #fff;
   display: inline-block;
-  font: bold 11px/11px Helvetica, sans-serif;
+  font: bold 11px/21px Helvetica, sans-serif;
   margin: 0 0 0 15px;
   text-decoration: none;
   text-transform: uppercase;
@@ -1694,8 +1694,9 @@ body.fullscreen {
 
 body.fullscreen #fullscreen-link {
   background: #fff;
-  padding: 2px 3px;
+  border-radius: 3px;
   color: #069;
+  padding: 0 6px;
 }
 
 body.fullscreen #fullscreen-link:hover {
@@ -1796,8 +1797,18 @@ body.fullscreen .story .summary .story-qa {
 
 /* Workspaces */
 
+#autocomplete .save-new-workspace {
+  background: #eee;
+  background: -webkit-linear-gradient(#eee, #ddd);
+  background: -moz-linear-gradient(#eee, #ddd);
+  background: linear-gradient(#eee, #ddd);
+  cursor: default;
+  margin: -7px -8px -5px;
+  padding: 10px 11px 9px;
+}
+
 #autocomplete .save-new-workspace input {
-  width: 166px;
+  width: 200px;
 }
 
 #autocomplete .save-new-workspace a.action {
@@ -1806,6 +1817,14 @@ body.fullscreen .story .summary .story-qa {
   padding: 0 12px;
   position: relative;
   top: -3px;
+}
+
+#autocomplete span.workspace-id {
+  color: #999;
+}
+
+#autocomplete div.active span.workspace-id {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 #autocomplete span.delete-workspace {

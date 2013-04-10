@@ -18,11 +18,14 @@ TT.Workspace = (function () {
       return false;
     }
 
-    var items = [{ name: TT.View.render('saveNewWorkspace'), value: 'New' }];
+    var items = [{ name: TT.View.render('saveNewWorkspace', { current_workspace: pub.getCurrentWorkspace() }), value: 'New' }];
 
     TT.Model.Workspace.each(function (index, workspace) {
       items[items.length] = {
-        name: TT.View.render('loadWorkspace', { name: workspace.name }),
+        name: TT.View.render('loadWorkspace', {
+          name: workspace.name,
+          id: items.length < 10 ? '(' + items.length + ')' : ''
+        }),
         value: workspace.name
       };
     });
@@ -31,7 +34,7 @@ TT.Workspace = (function () {
       customTopOffset: 4,
       items: items,
       target: this,
-      css: { width: 260 },
+      css: { width: 300 },
       maxHeight: $(window).height() - 60,
       noActive: true,
       onApply: function (value) {
@@ -85,7 +88,7 @@ TT.Workspace = (function () {
   };
 
   pub.deleteWorkspace = function () {
-    var name = $.trim($(this).parent().text());
+    var name = $.trim($(this).parent().find('.workspace-name').text());
     TT.Model.Workspace.remove({ name: name });
     TT.Model.Workspace.clientSave();
     TT.View.message('Workspace <strong>' + name + '</strong> removed.', 'success');
