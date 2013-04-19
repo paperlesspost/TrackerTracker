@@ -132,6 +132,10 @@ TT.Workspace = (function () {
 
   pub.init = function () {
     $(window).bind('keyup', function (e) {
+      if ($(document.activeElement).is('input')) {
+        return;
+      }
+
       if (e && e.which) {
         if (e.which >= 49 && e.which <= 57) {
           pub.loadWorkspaceByID(e.which - 49);
