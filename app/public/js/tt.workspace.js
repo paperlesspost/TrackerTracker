@@ -132,7 +132,7 @@ TT.Workspace = (function () {
 
   pub.init = function () {
     $(window).bind('keyup', function (e) {
-      if ($(document.activeElement).is('input')) {
+      if ($(document.activeElement).is('input, textarea, select')) {
         return;
       }
 
