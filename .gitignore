@@ -3,3 +3,4 @@ fingerprint
 node_modules
 app/public/css/bundle/*
 app/public/js/bundle/*
+.idea
