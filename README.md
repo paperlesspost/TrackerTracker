@@ -72,7 +72,7 @@ forever start --watch -l ~/forever.log -o ~/out.log -e ~/err.log app/app.js
 2. Install **Redis**: `brew install redis`
 3. Install **NodeJS**: [http://nodejs.org/](http://nodejs.org/)
 4. Install **Grunt-CLI**: `npm -g install grunt-cli`
-5. Install **Testacular**: `npm -g install testacular`
+5. Install **Karma**: `npm -g install karma`
 6. Install **TrackerTracker**: `git clone git@github.com:intentmedia/TrackerTracker.git`
 7. Install **NPM packages**: `cd TrackerTracker && npm install`
 
@@ -94,10 +94,10 @@ node app/app
 #### Running the Jasmine test suite once
 
 ```sh
-testacular start --single-run --browsers Safari
+karma start --single-run --browsers Safari
 ```
 
-Single-run benchmarks (includes starting Testacular, capturing the browser, running the tests, and killing processes):
+Single-run benchmarks (includes starting Karma, capturing the browser, running the tests, and killing processes):
 
 - PhantomJS 1.8.1: 12.3 seconds
 - Firefox 17: 4.1 seconds
@@ -106,12 +106,12 @@ Single-run benchmarks (includes starting Testacular, capturing the browser, runn
 
 #### Development Workflow
 
-You should have Grunt and Testacular running in the background while coding. If you're not, you're missing out on instant lint/test feedback and a headache-free build process. Here's how to do that:
+You should have Grunt and Karma running in the background while coding. If you're not, you're missing out on instant lint/test feedback and a headache-free build process. Here's how to do that:
 
-In terminal window #1, have Testacular auto-run on file changes:
+In terminal window #1, have Karma auto-run on file changes:
 
 ```sh
-testacular start
+karma start
 ```
 
 In terminal window #2, have Grunt auto-run (jshint, concat, hogan compile) on file changes:
