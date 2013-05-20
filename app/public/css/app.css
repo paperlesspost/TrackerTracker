@@ -645,8 +645,8 @@ body.has-modal-dialog {
   background-position: 18px 4px;
   border: 1px solid #fff;
   border-width: 1px 0;
-  border-top-color: rgba(255, 255, 255, 0.3);
-  border-bottom-color: rgba(0, 0, 0, 0.10);
+  border-top-color: rgba(255, 255, 255, 0.25);
+  border-bottom-color: rgba(0, 0, 0, 0.15);
   cursor: move;
   padding: 6px 6px 6px 38px;
   position: relative;
@@ -1053,6 +1053,48 @@ body.has-modal-dialog {
 
 .column-icebox .story:hover {
   background-color: #f7fafc;
+}
+
+/* Special Labels */
+
+.story.orange {
+  background-color: #ffb251;
+}
+
+.story.orange:hover {
+  background-color: #fac178;
+}
+
+.story.orange .summary .story-qa {
+  color: #636448;
+}
+
+.story.orange .summary .story-qa:hover {
+  color: #49493c;
+}
+
+.story.yellow {
+  background-color: #ff6;
+}
+
+.story.yellow:hover {
+  background-color: #ffb;
+}
+
+.story.green {
+  background-color: #7add61;
+}
+
+.story.green:hover {
+  background-color: #92f778;
+}
+
+.story.blue {
+  background-color: #6ecbff;
+}
+
+.story.blue:hover {
+  background-color: #89d0f8;
 }
 
 .story.expanded-story {

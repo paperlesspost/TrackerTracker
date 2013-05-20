@@ -301,7 +301,7 @@ TT.View = (function () {
     story.labels = label_backup;
     var element = pub.attach(html, target, insertMethod);
 
-    var specialLabels = ['blocked'];
+    var specialLabels = ['blocked', 'orange', 'yellow', 'green', 'blue'];
     $.each(specialLabels, function (i, label) {
       if (TT.Model.Story.hasTag(story, label)) {
         element.addClass(TT.Utils.cssify(label));

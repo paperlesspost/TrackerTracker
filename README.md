@@ -24,6 +24,7 @@ Multi-project Scrum UI for [Pivotal Tracker](http://www.pivotaltracker.com).
 
 * Wallboard mode, to mimic a wall of post-it notes
 * Workspaces let you quickly switch between sets of projects, filters, and columns. Use numbers 1-9 to switch between workspaces 1-9 in one keypress.
+* Special labels that change story appearance (blocked, orange, yellow, green, blue)
 
 ## Who Is This For?
 
