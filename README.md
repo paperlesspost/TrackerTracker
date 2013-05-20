@@ -132,6 +132,7 @@ TrackerTracker has been tested and built for Chrome, Safari, and Firefox. It see
 * Kurt Schrader ([@kurt](http://twitter.com/kurt))
 * John Whitfield ([@jkwhitfield](http://twitter.com/jkwhitfield))
 * James Cartledge ([jcartledge](https://github.com/jcartledge))
+* Tom Cabanski ([tcabanski](https://github.com/tcabanski))
 
 ## License
 
