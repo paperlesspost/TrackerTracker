@@ -27,10 +27,10 @@ TT.TeamCity = (function () {
   };
 
   pub.saveSettings = function () {
-    TT.Dialog.close();
     $.each(COOKIES, function (index, name) {
       $.cookie(name, $('#' + name).val(), { expires: 365 });
     });
+    TT.Dialog.close();
 
     return false;
   };
