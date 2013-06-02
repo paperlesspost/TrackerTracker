@@ -85,17 +85,27 @@ In terminal window #1, start redis:
 redis-server
 ```
 
-In terminal window #2, run grunt once to bundle your static files, and then start node:
+In terminal window #2, in the TrackerTracker directory, run grunt once to bundle your static files, and then start the node server:
 
 ```sh
 grunt
 node app/app
 ```
 
+#### Development Workflow
+
+Open a terminal window and run:
+
+```sh
+grunt watch
+```
+
+Whenever a file is changed, the entire client-side application is linted, bundled, and tested. This shouldn't take more than a couple seconds.
+
 #### Running the Jasmine test suite once
 
 ```sh
-karma start --single-run --browsers Safari
+karma start
 ```
 
 Single-run benchmarks (includes starting Karma, capturing the browser, running the tests, and killing processes):
@@ -104,22 +114,6 @@ Single-run benchmarks (includes starting Karma, capturing the browser, running t
 - Firefox 17: 4.1 seconds
 - Chrome 26: 3.4 seconds
 - Safari 6: 2.9 seconds
-
-#### Development Workflow
-
-You should have Grunt and Karma running in the background while coding. If you're not, you're missing out on instant lint/test feedback and a headache-free build process. Here's how to do that:
-
-In terminal window #1, have Karma auto-run on file changes:
-
-```sh
-karma start
-```
-
-In terminal window #2, have Grunt auto-run (jshint, concat, hogan compile) on file changes:
-
-```sh
-grunt watch
-```
 
 ## Browser Support
 

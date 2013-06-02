@@ -61,13 +61,19 @@ module.exports = function(grunt) {
       },
       tt: ['app/public/js/*.js']
     },
+    karma: {
+      tests: {
+        configFile: 'karma.conf.js'
+      }
+    },
     watch: {
       files: [
         'app/public/css/*',
         'app/public/js/*',
-        'app/views/templates/*'
+        'app/views/**',
+        'test/**'
       ],
-      tasks: 'default'
+      tasks: 'test'
     }
   });
 
@@ -97,8 +103,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-fingerprint');
+  grunt.loadNpmTasks('grunt-karma');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'hogan', 'concat', 'uglify', 'fingerprint']);
+  grunt.registerTask('test', ['default', 'karma']);
 
 };

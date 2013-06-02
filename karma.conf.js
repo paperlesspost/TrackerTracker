@@ -1,4 +1,4 @@
-// Testacular configuration
+// Karma configuration
 // Generated on Mon Dec 24 2012 11:42:55 GMT-0500 (EST)
 
 
@@ -51,7 +51,7 @@ logLevel = LOG_INFO;
 
 
 // enable / disable watching file and executing tests whenever any file changes
-autoWatch = true;
+autoWatch = false;
 
 
 // Start these browsers, currently available:
@@ -62,7 +62,8 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome', 'Firefox', 'Safari'];
+browsers = ['Chrome'];
+
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;
@@ -70,5 +71,5 @@ captureTimeout = 5000;
 
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
-singleRun = false;
+singleRun = true;
 
