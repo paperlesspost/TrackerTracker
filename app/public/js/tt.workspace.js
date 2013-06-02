@@ -131,7 +131,7 @@ TT.Workspace = (function () {
   };
 
   pub.init = function () {
-    $(window).bind('keyup', function (e) {
+    $(window).on('keyup', function (e) {
       if ($(document.activeElement).is('input, textarea, select')) {
         return;
       }
@@ -141,12 +141,11 @@ TT.Workspace = (function () {
           pub.loadWorkspaceByID(e.which - 49);
         } else if (e.which >= 97 && e.which <= 105) {
           pub.loadWorkspaceByID(e.which - 97);
-        } else if (e.which === 192) {
-          // `~ key
+        } else if (TT.Utils.keyPressed(e, 'TILDE')) {
           $('#fullscreen-link').click();
         }
       }
-    }).bind('workspaceUpdate', function () {
+    }).on('workspaceUpdate', function () {
       pub.setCurrentWorkspace('Custom Workspace');
     });
   };

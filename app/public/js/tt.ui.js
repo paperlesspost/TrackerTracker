@@ -760,8 +760,17 @@ TT.UI = (function () {
     return false;
   };
 
-  pub.init = function () {
-    var timeoutID;
+  pub.fireEventHandler = function (target, eventType, e) {
+    var handler = target.data(eventType);
+    if (handler) {
+      handler = TT.Utils.strToFunction(handler);
+      if (TT.Utils.isFunction(handler)) {
+        return handler.call(target[0], e);
+      }
+    }
+  };
+
+  pub.initClickHandler = function () {
     $('body').click(function (e) {
       var target = $(e.target);
       // Handle links in textareas
@@ -771,26 +780,34 @@ TT.UI = (function () {
       }
 
       target = target.closest('[data-click-handler]');
-      var handler = target.data('click-handler');
-      if (handler) {
-        handler = TT.Utils.strToFunction(handler);
-        if (TT.Utils.isFunction(handler)) {
-          return handler.call(target[0], e);
-        }
-      }
-    }).mousemove(function (e) {
+      pub.fireEventHandler(target, 'click-handler', e);
+    });
+  };
+
+  pub.initHoverHandler = function () {
+    var timeoutID;
+    $('body').mousemove(function (e) {
       clearTimeout(timeoutID);
       timeoutID = setTimeout(function () {
         var target = $(e.target).closest('[data-hover-handler]');
-        var handler = target.data('hover-handler');
-        if (handler) {
-          handler = TT.Utils.strToFunction(handler);
-          if (TT.Utils.isFunction(handler)) {
-            return handler.call(target[0], e);
-          }
-        }
+        pub.fireEventHandler(target, 'hover-handler', e);
       }, 50);
     });
+  };
+
+  pub.initSubmitHandler = function () {
+    $(window).on('keyup', function (e) {
+      var target = $(document.activeElement);
+      if (target.is('input, textarea') && TT.Utils.keyPressed(e, 'ENTER')) {
+        pub.fireEventHandler(target, 'submit-handler', e);
+      }
+    });
+  };
+
+  pub.init = function () {
+    pub.initClickHandler();
+    pub.initHoverHandler();
+    pub.initSubmitHandler();
   };
 
   return pub;
