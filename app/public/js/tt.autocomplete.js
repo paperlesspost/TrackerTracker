@@ -8,10 +8,11 @@ TT.Autocomplete = (function () {
     closeOnInputBlur: true,
     closeOnApply: true,
     maxHeight: 240,
-    noActive: false
+    noActive: false,
+    showInput: false
   };
-  pub.options = {};
 
+  pub.options = {};
   pub.target = null;
   pub.input = null;
   pub.hasMouse = false;
@@ -56,7 +57,7 @@ TT.Autocomplete = (function () {
       pub.input = pub.target;
     }
 
-    if (!pub.options.noActive) {
+    if (pub.options.noActive === false) {
       var inputVal = pub.input.val();
       var active = $('#autocomplete .item').filter(function () {
         return $(this).data('value') === inputVal || $(this).text() === inputVal;

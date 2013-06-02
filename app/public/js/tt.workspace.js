@@ -14,11 +14,11 @@ TT.Workspace = (function () {
   pub.openDropdown = function () {
     if ($('#autocomplete .save-new-workspace').length > 0) {
       TT.Autocomplete.close();
-
       return false;
     }
 
-    var items = [{ name: TT.View.render('saveNewWorkspace', { current_workspace: pub.getCurrentWorkspace() }), value: 'New' }];
+    var workspaceHTML = TT.View.render('saveNewWorkspace', { current_workspace: pub.getCurrentWorkspace() });
+    var items = [{ name: workspaceHTML, value: 'New' }];
 
     TT.Model.Workspace.each(function (index, workspace) {
       items[items.length] = {
