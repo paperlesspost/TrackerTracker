@@ -70,12 +70,11 @@ forever start --watch -l ~/forever.log -o ~/out.log -e ~/err.log app/app.js
 ## OS X Developer Installation
 
 1. Install **Homebrew**: [http://mxcl.github.com/homebrew/](http://mxcl.github.com/homebrew/)
-2. Install **Redis**: `brew install redis`
-3. Install **NodeJS**: [http://nodejs.org/](http://nodejs.org/)
-4. Install **Grunt-CLI**: `npm -g install grunt-cli`
-5. Install **Karma**: `npm -g install karma`
-6. Install **TrackerTracker**: `git clone git@github.com:intentmedia/TrackerTracker.git`
-7. Install **NPM packages**: `cd TrackerTracker && npm install`
+2. Install **Redis** and **NodeJS**: `brew install redis node`
+3. Install **NPM**: `curl https://npmjs.org/install.sh | sh`
+4. Install **Grunt-CLI** and **Karma**: `npm -g install grunt-cli karma`
+5. Install **TrackerTracker**: `git clone git@github.com:intentmedia/TrackerTracker.git`
+6. Install **NPM packages**: `cd TrackerTracker && npm install`
 
 #### Running the app
 
