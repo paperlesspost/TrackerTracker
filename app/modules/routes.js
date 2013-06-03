@@ -57,7 +57,13 @@ exports.updateStory = function (req, res) {
 
 exports.addStoryComment = function (req, res) {
   pivotal.addStoryComment(req.body.projectID, req.body.storyID, req.body.comment, function (err, results) {
-    res.json(true);
+    if (results) {
+      pivotal.getStory(req.body.projectID, req.body.storyID, function (err, results) {
+        res.json(results || false);
+      });
+    } else {
+      res.json(false);
+    }
   });
 };
 

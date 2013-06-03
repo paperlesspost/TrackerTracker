@@ -988,6 +988,14 @@ body.has-modal-dialog {
   font-weight: bold;
 }
 
+.story .actions .saving {
+  background: url(/images/loading-white.gif) no-repeat scroll 0 5px transparent;
+  color: #9B6300;
+  display: inline-block;
+  font: bold 12px/26px Helvetica, Arial, sans-serif;
+  padding: 0 0 0 22px;
+}
+
 .story .dates {
   color: #777;
   font: normal 11px/15px Helvetica, sans-serif;

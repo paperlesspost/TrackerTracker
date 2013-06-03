@@ -650,17 +650,12 @@ TT.UI = (function () {
     var story = getStoryFromContext(this);
     var comment = $(this).closest('.textarea').find('textarea').val();
 
-    if (!comment) {
+    if (comment) {
+      TT.Model.Story.saveComment(story, comment);
+      $(this).closest('.actions').html('<div class="saving">Saving...</div>');
+    } else {
       TT.View.message('Your note is empty.', { type: 'error' });
-      return false;
     }
-
-    TT.Model.Story.saveComment(story, comment, function () {
-      TT.View.redrawStory(story);
-    });
-
-    $(this).closest('.story').find('.add-note').show();
-    $(this).closest('.textarea').remove();
 
     return false;
   };

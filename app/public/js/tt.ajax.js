@@ -40,6 +40,11 @@ TT.Ajax = (function () {
           options.callback(response);
         }
       },
+      error: function () {
+        if (options.error) {
+          options.error();
+        }
+      },
       complete: pub.end
     });
   };

@@ -540,18 +540,11 @@ TT.Model = (function () {
     pub.Story.serverSave(story, { description: description });
   };
 
-  pub.Story.saveComment = function (story, comment, callback) {
-    TT.Utils.updateStoryState(story.id, { note: null, noteHeight: null });
-
-    story.notes.unshift({
-      timestamp: new Date().getTime(),
-      text: comment,
-      author: TT.Utils.getUsername(),
-      noted_at: new Date() + '',
-      isImage: false
-    });
-
-    pub.Story.update({ id: story.id }, { notes: story.notes });
+  pub.Story.saveComment = function (story, comment) {
+    function restoreStoryOnError() {
+      TT.View.redrawStory(story);
+      TT.View.message('Comment save failed.', { type: 'error' });
+    }
 
     TT.Ajax.post('/addStoryComment', {
       data: {
@@ -559,7 +552,18 @@ TT.Model = (function () {
         storyID: story.id,
         comment: comment
       },
-      callback: callback
+      error: restoreStoryOnError,
+      callback: function (updatedStory) {
+        if (updatedStory && updatedStory.id) {
+          // TODO: Improve story state handling
+          TT.Utils.updateStoryState(story.id, { note: null, noteHeight: null });
+          updatedStory.expanded = story.expanded;
+          pub.Story.overwrite(updatedStory);
+          TT.View.redrawStory(updatedStory);
+        } else {
+          restoreStoryOnError();
+        }
+      }
     });
   };
 

@@ -61,6 +61,7 @@ describe "Story UI Interactions", ->
                 description: edited_description
               }
             },
+            error: jasmine.any(Function),
             success: jasmine.any(Function),
             complete: jasmine.any(Function)
           }
@@ -88,6 +89,7 @@ describe "Story UI Interactions", ->
               labels: getLabelsString($('.story-' + id).find('.details .tag'))
             }
           },
+          error: jasmine.any(Function),
           success: jasmine.any(Function),
           complete: jasmine.any(Function)
         }
@@ -118,9 +120,6 @@ describe "Story UI Interactions", ->
         beforeEach ->
           $('.story-' + id).find('.notes .actions a.save').click()
 
-        it "should save the note on the client-side", ->
-          expect(TT.Model.Story.get({ id: id }).notes[0].text).toBe my_note
-
         it "should save the note on the server-side", ->
           expect($.ajax).toHaveBeenCalledWith {
             url: '/addStoryComment',
@@ -130,6 +129,7 @@ describe "Story UI Interactions", ->
               storyID: id,
               comment: my_note
             },
+            error: jasmine.any(Function),
             success: jasmine.any(Function),
             complete: jasmine.any(Function)
           }
@@ -190,6 +190,7 @@ describe "Story UI Interactions", ->
             storyID: id,
             data: { owned_by: 'Developer', initials: 'DVL' }
           },
+          error: jasmine.any(Function),
           success: jasmine.any(Function),
           complete: jasmine.any(Function)
         }
