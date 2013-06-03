@@ -487,9 +487,7 @@ TT.Model = (function () {
     story = pub.Story.decorateStoryWithMetadata(story);
 
     pub.Story.update({ id: story.id }, update);
-    pub.Story.serverSave(story, update, function () {
-      TT.View.redrawStory(story);
-    });
+    pub.Story.serverSave(story, update);
     TT.View.redrawStory(story);
   };
 
@@ -499,17 +497,6 @@ TT.Model = (function () {
 
   pub.Story.addPair = function (story, pair) {
     pub.Story.saveMetadata(story, 'pair', pair);
-  };
-
-  pub.Story.serverSave = function (story, data, callback) {
-    TT.Ajax.post('/updateStory', {
-      data: {
-        projectID: story.project_id,
-        storyID: story.id,
-        data: pub.Story.onBeforeSave(data)
-      },
-      callback: callback
-    });
   };
 
   pub.Story.saveLabels = function (story, labels) {
@@ -530,41 +517,65 @@ TT.Model = (function () {
     pub.Story.serverSave(story, { name: name });
   };
 
-  pub.Story.saveDescription = function (story, description, formatted_description) {
-    TT.Utils.updateStoryState(story.id, { description: null, descriptionHeight: null });
-
-    pub.Story.update({ id: story.id }, {
-      description: description,
-      formatted_description: formatted_description
+  pub.Story.saveDescription = function (story, description) {
+    pub.Story.serverSave(story, { description: description }, function (updatedStory) {
+      TT.Utils.updateStoryState(updatedStory.id, {
+        description: null,
+        descriptionHeight: null
+      });
     });
-    pub.Story.serverSave(story, { description: description });
+  };
+
+  pub.Story.serverSave = function (story, updates, onSuccess) {
+    var data = {
+      projectID: story.project_id,
+      storyID: story.id,
+      data: pub.Story.onBeforeSave(updates)
+    };
+
+    pub.Story.post('/updateStory', data, story, onSuccess);
   };
 
   pub.Story.saveComment = function (story, comment) {
-    function restoreStoryOnError() {
-      TT.View.redrawStory(story);
-      TT.View.message('Comment save failed.', { type: 'error' });
-    }
+    var data = {
+      projectID: story.project_id,
+      storyID: story.id,
+      comment: comment
+    };
 
-    TT.Ajax.post('/addStoryComment', {
-      data: {
-        projectID: story.project_id,
-        storyID: story.id,
-        comment: comment
+    pub.Story.post('/addStoryComment', data, story, function (updatedStory) {
+      TT.Utils.updateStoryState(updatedStory.id, {
+        note: null,
+        noteHeight: null
+      });
+    });
+  };
+
+  pub.Story.post = function (url, data, story, onSuccess) {
+    TT.Ajax.post(url, {
+      data: data,
+      error: function () {
+        pub.Story.recoverFromError(story);
       },
-      error: restoreStoryOnError,
       callback: function (updatedStory) {
         if (updatedStory && updatedStory.id) {
           // TODO: Improve story state handling
-          TT.Utils.updateStoryState(story.id, { note: null, noteHeight: null });
+          if (onSuccess) {
+            onSuccess(updatedStory);
+          }
           updatedStory.expanded = story.expanded;
           pub.Story.overwrite(updatedStory);
           TT.View.redrawStory(updatedStory);
         } else {
-          restoreStoryOnError();
+          pub.Story.recoverFromError(story);
         }
       }
     });
+  };
+
+  pub.Story.recoverFromError = function (story) {
+    TT.View.redrawStory(story);
+    TT.View.message('Story save failed.', { type: 'error' });
   };
 
   pub.Story.changePriority = function (story) {

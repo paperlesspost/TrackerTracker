@@ -47,9 +47,6 @@ describe "Story UI Interactions", ->
         beforeEach ->
           $('.story-' + id).find('.description-container .actions a.save').click()
 
-        it "should save the description on the client-side", ->
-          expect(TT.Model.Story.get({ id: id }).description).toBe edited_description
-
         it "should try to save the description on the server-side", ->
           expect($.ajax).toHaveBeenCalledWith {
             url: '/updateStory',
@@ -65,9 +62,6 @@ describe "Story UI Interactions", ->
             success: jasmine.any(Function),
             complete: jasmine.any(Function)
           }
-
-        it "should display the new description", ->
-          expect($('.story-' + id).find('.description').text()).toContain edited_description
 
     also "I click the delete button on a tag", ->
       tagName = 'blocked'

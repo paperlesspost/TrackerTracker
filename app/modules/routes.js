@@ -51,7 +51,13 @@ exports.addStory = function (req, res) {
 
 exports.updateStory = function (req, res) {
   pivotal.updateStory(req.body.projectID, req.body.storyID, req.body.data, function (err, results) {
-    res.json(true);
+    if (results) {
+      pivotal.getStory(req.body.projectID, req.body.storyID, function (err, results) {
+        res.json(results || false);
+      });
+    } else {
+      res.json(false);
+    }
   });
 };
 

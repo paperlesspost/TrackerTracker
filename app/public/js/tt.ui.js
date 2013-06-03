@@ -636,12 +636,9 @@ TT.UI = (function () {
   pub.saveStoryDescription = function () {
     var story = getStoryFromContext(this);
     var description = $(this).closest('.textarea').find('textarea').val();
-    var formatted_description = description ? TT.Utils.marked(description) : '<span class="ghost">Click to add a description</span>';
 
-    TT.Model.Story.saveDescription(story, description, formatted_description);
-
-    $(this).closest('.story').find('.description').show().html(formatted_description);
-    $(this).closest('.textarea').remove();
+    TT.Model.Story.saveDescription(story, description);
+    $(this).closest('.actions').html('<div class="saving">Saving...</div>');
 
     return false;
   };
