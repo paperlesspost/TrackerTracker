@@ -400,6 +400,14 @@ body.has-modal-dialog {
   background: url(/images/close_hover.png) no-repeat scroll center right transparent;
 }
 
+#messages .message-error {
+  background: rgba(60, 0, 0, 0.75);
+}
+
+#messages .message-error:hover {
+  background: rgba(60, 0, 0, 0.85);
+}
+
 /* Import progress bar */
 
 .progressbar {

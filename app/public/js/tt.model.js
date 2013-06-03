@@ -507,14 +507,13 @@ TT.Model = (function () {
     TT.View.drawColumnTemplates();
   };
 
-  pub.Story.saveTitle = function (story, name, formatted_name) {
-    TT.Utils.updateStoryState(story.id, { name: null, nameHeight: null });
-
-    pub.Story.update({ id: story.id }, {
-      name: name,
-      formatted_name: formatted_name
+  pub.Story.saveTitle = function (story, name) {
+    pub.Story.serverSave(story, { name: name }, function (updatedStory) {
+      TT.Utils.updateStoryState(updatedStory.id, {
+        name: null,
+        nameHeight: null
+      });
     });
-    pub.Story.serverSave(story, { name: name });
   };
 
   pub.Story.saveDescription = function (story, description) {

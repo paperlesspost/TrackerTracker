@@ -618,17 +618,13 @@ TT.UI = (function () {
   pub.saveStoryTitle = function () {
     var story = getStoryFromContext(this);
     var name = $(this).closest('.textarea').find('textarea').val();
-    var formatted_name = name ? TT.Utils.marked(name) : '';
 
-    if (!name) {
+    if (name) {
+      TT.Model.Story.saveTitle(story, name);
+      $(this).closest('.actions').html('<div class="saving">Saving...</div>');
+    } else {
       TT.View.message('Title is required.', { type: 'error' });
-      return false;
     }
-
-    TT.Model.Story.saveTitle(story, name, formatted_name);
-
-    $(this).closest('.story').find('.title').show().html(formatted_name);
-    $(this).closest('.textarea').remove();
 
     return false;
   };
