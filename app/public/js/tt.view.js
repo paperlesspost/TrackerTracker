@@ -325,6 +325,13 @@ TT.View = (function () {
 
   pub.drawStoryDetails = function (storyElement) {
     var story = TT.Model.Story.get({ id: storyElement.data('id') });
+
+    if (!story.formatted) {
+      story.formatted_description = story.description ? TT.Utils.marked(story.description) : '<span class="ghost">Click to add a description</span>';
+      story.notes = TT.Model.Story.compileNotes(story);
+      story.formatted = true;
+    }
+
     TT.Event.trigger('beforeStoryDetailsRender', story);
 
     var html = pub.render('storyDetails', story);

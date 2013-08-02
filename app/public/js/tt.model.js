@@ -284,15 +284,14 @@ TT.Model = (function () {
   pub.Story = pub.Model('Story');
 
   pub.Story.onBeforeAdd = function (story) {
+    story.formatted = false;
     story.id = parseInt(story.id, 10);
     story.has_images = false;
     story.project_id = parseInt(story.project_id, 10);
     story.formatted_name = TT.Utils.marked(story.name);
     story.description = TT.Utils.isString(story.description) ? story.description : '';
-    story.formatted_description = story.description ? TT.Utils.marked(story.description) : '<span class="ghost">Click to add a description</span>';
     story.estimate = story.estimate >= 0 ? story.estimate : '';
     story.labels = TT.Utils.isString(story.labels) ? story.labels.indexOf(',') !== -1 ? story.labels.split(',') : [story.labels] : [];
-    story.notes = compileNotes(story);
 
     story = pub.Story.decorateStoryWithMetadata(story);
 
@@ -333,7 +332,7 @@ TT.Model = (function () {
     return (/\.(gif|jpg|jpeg|png)$/i).test(filename);
   }
 
-  function compileNotes(story) {
+  pub.Story.compileNotes = function (story) {
     if (story.notes && story.notes.note) {
       story.notes = $.map(TT.Utils.normalizePivotalArray(story.notes.note), function (note, index) {
         if (TT.Utils.isString(note.text)) {
@@ -386,7 +385,7 @@ TT.Model = (function () {
     }
 
     return TT.Utils.sortByProperty(story.notes, 'timestamp');
-  }
+  };
 
   pub.Story.onBeforeSave = function (data) {
     if (data.labels) {
