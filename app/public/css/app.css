@@ -532,17 +532,12 @@ body.has-modal-dialog {
   background: #ccc;
   box-shadow: none;
   color: #555;
-  padding-right: 8px;
   text-shadow: none;
 }
 
 .filter.inactive:hover {
   background: #999;
   color: #fff;
-}
-
-.filter.inactive span.close {
-  display: none;
 }
 
 /* columnList */
