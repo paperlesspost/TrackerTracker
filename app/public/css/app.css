@@ -143,6 +143,22 @@ a.action:hover {
   border-color: #9e5d09;
 }
 
+a.gray.action {
+  background: #999;
+  background: -webkit-linear-gradient(#aaa, #888);
+  background: -moz-linear-gradient(#aaa, #888);
+  background: linear-gradient(#aaa, #888);
+  border: 1px solid #777;
+}
+
+a.gray.action:hover {
+  background: #888;
+  background: -webkit-linear-gradient(#999, #777);
+  background: -moz-linear-gradient(#999, #777);
+  background: linear-gradient(#999, #777);
+  border-color: #666;
+}
+
 /* Header */
 
 #header {
@@ -1263,9 +1279,10 @@ input.textfield.autocomplete {
 }
 
 .column-icebox .column-template a {
-  margin: 10px 12px;
-  font: bold 11px/14px Helvetica, sans-serif;
-  padding: 7px 12px;
+  display: block;
+  font: bold 10px/12px Helvetica, sans-serif;
+  margin: 2px;
+  padding: 4px 8px 5px;
 }
 
 /* Epics */
