@@ -89,6 +89,37 @@ TT.UI = (function () {
     // intentionally not returning false here to continue event bubbling
   };
 
+  pub.openFloatingStoryPreview = function () {
+    var story = getStoryFromContext(this);
+    var container = $('<div class="floating-story"></div>').appendTo('body');
+    var offset = $(this).closest('.story').offset();
+    var win = $(window);
+
+    TT.View.drawStoryHelper(story, container);
+    var storyElement = container.find('.story');
+    storyElement.addClass('expanded-story');
+    TT.View.drawStoryDetails(storyElement);
+
+    container.css({
+      left: Math.min(offset.left, win.width() - container.outerWidth() - 10),
+      top: Math.min(win.height() / 2, offset.top)
+    });
+
+    var maxHeight = win.height() - container.offset().top - 15;
+    container.css({ maxHeight: maxHeight });
+
+    var timeoutID;
+    container.on('mouseenter', function () {
+      clearTimeout(timeoutID);
+    });
+    container.on('mouseleave', function () {
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(function () {
+        container.remove();
+      }, 300);
+    });
+  };
+
   pub.toggleStory = function () {
     var element = $(this).closest('.story').toggleClass('expanded-story');
     var story = getStoryFromContext(this);

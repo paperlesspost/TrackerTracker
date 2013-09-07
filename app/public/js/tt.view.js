@@ -217,7 +217,7 @@ TT.View = (function () {
   };
 
   pub.clearStories = function () {
-    $('.story').remove();
+    $('#columns .story').remove();
   };
 
   pub.drawStories = function () {

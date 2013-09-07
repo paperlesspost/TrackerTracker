@@ -2,7 +2,7 @@
   <div class="toggle-arrow" data-click-handler="TT.UI.toggleStory"></div>
   <div class="summary">
     <div class="points" data-click-handler="TT.UI.openStoryPointsUpdater">{{estimate}}</div>
-    <div class="icon"></div>
+    <div class="icon" data-hover-handler="TT.UI.openFloatingStoryPreview"></div>
     <div class="title">
       <a href="#" data-project-id="{{project_id}}" data-project-name="{{project_name}}" data-click-handler="TT.UI.filterByProject" data-hover-handler="TT.UI.storyProjectTooltip" class="project-name project-{{project_classname}}">{{project_initials}}</a>
       {{{formatted_name}}}
