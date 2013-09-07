@@ -38,28 +38,53 @@ TT.Search = (function () {
   };
 
   pub.requestMatchingStories = function (term) {
-    TT.View.message('Searching for <strong>' + term + '</strong>...', { type: 'search' });
     if (pub.includeDone()) {
       term += ' includedone:true';
     }
+
+    var projectCount = TT.Model.Project.length();
+    var projectsSearched = 0;
+    var storiesFound = 0;
+
+    var html = TT.View.render('searchProgress', {
+      percentCompleted: 0,
+      projectCount: projectCount,
+      projectsSearched: projectsSearched,
+      storiesFound: storiesFound,
+      term: term
+    });
+    var message = TT.View.message(html, { timeout: false, type: 'search' });
+
     TT.Model.Project.each(function (index, project) {
       TT.Ajax.start();
       $.ajax({
         url: '/stories',
         data: { projectID: project.id, filter: term },
         success: function (stories) {
+          projectsSearched++;
           stories = TT.Utils.normalizePivotalArray(stories.story);
           if (stories) {
-            TT.View.message('Found <strong>' + stories.length + '</strong> stories in <strong>' + project.name + '</strong>', { type: 'search' });
             $.each(stories, function (index, story) {
               story.id = parseInt(story.id, 10);
               TT.Model.Story.overwrite(story);
             });
             TT.View.drawStories();
-          } else {
-            TT.View.message('No results found in <strong>' + project.name + '</strong>', { type: 'search' });
+            storiesFound += stories.length;
           }
           TT.Ajax.end();
+          var html = TT.View.render('searchProgress', {
+            percentCompleted: (projectsSearched / projectCount) * 100,
+            projectCount: projectCount,
+            projectsSearched: projectsSearched,
+            storiesFound: storiesFound,
+            term: term
+          });
+          message.find('.text').html(html);
+          if (projectsSearched === projectCount) {
+            setTimeout(function () {
+              message.fadeOut(250, function () { message.remove(); });
+            }, 1000);
+          }
         }
       });
     });

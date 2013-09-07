@@ -90,6 +90,10 @@ TT.Model = (function () {
       return data ? JSON.parse(data) : false;
     };
 
+    self.length = function () {
+      return self.DB.length;
+    };
+
     self.find = function (query, returnIndex) {
       return find(self.DB, query, returnIndex);
     };
