@@ -37,7 +37,14 @@ TT.Search = (function () {
     return $('#includeDone').is(':checked');
   };
 
-  pub.requestMatchingStories = function (term) {
+  pub.requestMatchingStories = function (term, options) {
+    var defaults = {
+      limit: 500,
+      offset: 0,
+      showProgress: true
+    };
+
+    options = $.extend(defaults, options);
     if (pub.includeDone()) {
       term += ' includedone:true';
     }
@@ -46,20 +53,27 @@ TT.Search = (function () {
     var projectsSearched = 0;
     var storiesFound = 0;
 
-    var html = TT.View.render('searchProgress', {
-      percentCompleted: 0,
-      projectCount: projectCount,
-      projectsSearched: projectsSearched,
-      storiesFound: storiesFound,
-      term: term
-    });
-    var message = TT.View.message(html, { timeout: false, type: 'search' });
+    if (options.showProgress) {
+      var html = TT.View.render('searchProgress', {
+        percentCompleted: 0,
+        projectCount: projectCount,
+        projectsSearched: projectsSearched,
+        storiesFound: storiesFound,
+        term: term
+      });
+      var message = TT.View.message(html, { timeout: false, type: 'search' });
+    }
 
     TT.Model.Project.each(function (index, project) {
       TT.Ajax.start();
       $.ajax({
         url: '/stories',
-        data: { projectID: project.id, filter: term },
+        data: {
+          projectID: project.id,
+          filter: term,
+          limit: options.limit,
+          offset: options.offset
+        },
         success: function (stories) {
           projectsSearched++;
           stories = TT.Utils.normalizePivotalArray(stories.story);
@@ -79,11 +93,13 @@ TT.Search = (function () {
             storiesFound: storiesFound,
             term: term
           });
-          message.find('.text').html(html);
-          if (projectsSearched === projectCount) {
-            setTimeout(function () {
-              message.fadeOut(250, function () { message.remove(); });
-            }, 1000);
+          if (options.showProgress) {
+            message.find('.text').html(html);
+            if (projectsSearched === projectCount) {
+              setTimeout(function () {
+                message.fadeOut(250, function () { message.remove(); });
+              }, 1000);
+            }
           }
         }
       });

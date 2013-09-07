@@ -62,7 +62,7 @@ TT.DragAndDrop = (function () {
 
   pub.initStorySorting = function () {
     $('.sortable-column').not('.ui-sortable').sortable({
-      cancel: '.expanded-story',
+      cancel: '.expanded-story, .column-template',
       connectWith: '.sortable-column',
       containment: '#content',
       distance: 10,

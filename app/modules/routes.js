@@ -38,7 +38,12 @@ exports.getIterations = function (req, res) {
 };
 
 exports.getStories = function (req, res) {
-  pivotal.getStories(req.query.projectID, { limit: 500, filter: req.query.filter }, function (err, results) {
+  var filter = {
+    filter: req.query.filter,
+    limit: req.query.limit || 500,
+    offset: req.query.offset || 0
+  };
+  pivotal.getStories(req.query.projectID, filter, function (err, results) {
     res.json(results || {});
   });
 };

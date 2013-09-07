@@ -50,7 +50,7 @@ TT.View = (function () {
     $columns.each(function () {
       var $column = $(this);
       var name = $column.data('name');
-      if ($column.find('.story').length === 0 && name !== 'Icebox' && name !== 'Labels') {
+      if ($column.find('.story').length === 0 && name !== 'Labels') {
         $column.addClass('empty-column');
         emptyColumnCount++;
       } else {
@@ -117,7 +117,6 @@ TT.View = (function () {
   };
 
   pub.drawColumn = function (name) {
-    $('#columns .column[data-name="' + name + '"]').remove();
     var column = TT.Model.Column.get({ name: name });
     var html = pub.render('column', column);
     var element = pub.attachColumn(column, html);
@@ -184,7 +183,7 @@ TT.View = (function () {
   pub.drawColumnTemplate = function (column) {
     if (column.template) {
       var html = '<div class="column-template">' + column.template() + '</div>';
-      var element = pub.attach(html, '#columns .' + column.class_name + ' .column-bucket');
+      var element = pub.attach(html, '#columns .' + column.class_name + ' .bucket-template');
 
       if (column.afterTemplateRender) {
         column.afterTemplateRender();
@@ -284,7 +283,7 @@ TT.View = (function () {
   };
 
   pub.drawStory = function (story, column) {
-    return pub.drawStoryHelper(story, '.' + column.class_name + ' .column-bucket');
+    return pub.drawStoryHelper(story, '.' + column.class_name + ' .bucket-content');
   };
 
   pub.redrawStory = function (story) {

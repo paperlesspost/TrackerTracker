@@ -30,7 +30,6 @@ TT.Init = (function () {
     TT.Model.Column.add({
       name: 'Icebox',
       active: false,
-      sortable: false,
       template: function () {
         return TT.View.render('emptyIcebox');
       },
@@ -372,6 +371,7 @@ TT.Init = (function () {
       TT.View.drawProjectList(projects);
       pub.setInactiveProjects();
       pub.requestAllIterations();
+      pub.requestIceboxSample();
     }
 
     TT.Ajax.start();
@@ -389,6 +389,10 @@ TT.Init = (function () {
         }
       });
     }
+  };
+
+  pub.requestIceboxSample = function () {
+    TT.Search.requestMatchingStories('state:unscheduled', { limit: 50, showProgress: false });
   };
 
   pub.requestAllIterations = function () {

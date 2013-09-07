@@ -1262,6 +1262,12 @@ input.textfield.autocomplete {
   padding: 0 12px;
 }
 
+.column-icebox .column-template a {
+  margin: 10px 12px;
+  font: bold 11px/14px Helvetica, sans-serif;
+  padding: 7px 12px;
+}
+
 /* Epics */
 
 #columns .column-labels .column-bucket {

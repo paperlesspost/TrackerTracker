@@ -685,10 +685,9 @@ TT.UI = (function () {
   }
 
   pub.loadIcebox = function () {
-    $(this).closest('.column-note').remove();
+    $(this).closest('.column-template').remove();
 
     var column = TT.Model.Column.get({ name: 'Icebox' });
-    column.sortable = true;
     column.template = null;
 
     TT.Search.requestMatchingStories('state:unscheduled');
