@@ -291,6 +291,18 @@ TT.View = (function () {
       pub.drawStoryHelper(story, this, 'insertAfter');
       $(this).remove();
     });
+    pub.redrawFloatingStory(story);
+  };
+
+  pub.redrawFloatingStory = function (story) {
+    var container = $('.floating-story');
+    if (container.length > 0) {
+      container.find('.story').remove();
+      TT.View.drawStoryHelper(story, container);
+      var storyElement = container.find('.story');
+      storyElement.addClass('expanded-story');
+      TT.View.drawStoryDetails(storyElement);
+    }
   };
 
   pub.drawStoryHelper = function (story, target, insertMethod) {

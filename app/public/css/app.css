@@ -1176,12 +1176,12 @@ body.has-modal-dialog {
   background: #fff;
   border: 3px solid #fff;
   border-radius: 3px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.7), 0 3px 6px rgba(0, 0, 0, 0.5);
   left: 0;
   overflow-y: auto;
   position: absolute;
   top: 0;
-  width: 500px;
+  width: 520px;
 }
 
 .floating-story .toggle-arrow {
@@ -1849,6 +1849,22 @@ body.fullscreen .story {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   margin-bottom: 4px;
   padding: 12px 22px 12px 14px;
+}
+
+body.fullscreen .story .formatted-title {
+  display: inline-block;
+  text-indent: 20px;
+}
+
+body.fullscreen .story .icon {
+  height: 22px;
+  left: 10px;
+  width: 22px;
+  top: 10px;
+}
+
+body.fullscreen .bucket-template {
+  display: none;
 }
 
 body.fullscreen .story .summary .tag {

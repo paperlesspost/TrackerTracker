@@ -25,20 +25,13 @@ TT.Tooltip = (function () {
   }
 
   function setClosingBoundaries() {
-    var bounds = self.target.offset();
-    bounds.right = bounds.left + self.target.outerWidth();
-    bounds.bottom = bounds.top + self.target.outerHeight();
-
-    $('body').bind('mousemove.Tooltip', function (e) {
-      if (e.pageX < bounds.left || e.pageX > bounds.right || e.pageY < bounds.top || e.pageY > bounds.bottom) {
-        clearTimeout(self.timeout);
-        $('body').unbind('.Tooltip');
-        self.tooltip.fadeOut(60, function () {
-          self.tooltip.remove();
-          self.active = false;
-          self.tooltip = null;
-        });
-      }
+    TT.Utils.setBoundaryCallback(self.target, function () {
+      clearTimeout(self.timeout);
+      self.tooltip.fadeOut(60, function () {
+        self.tooltip.remove();
+        self.active = false;
+        self.tooltip = null;
+      });
     });
   }
 

@@ -5,7 +5,7 @@
     <div class="icon" data-hover-handler="TT.UI.openFloatingStoryPreview"></div>
     <div class="title">
       <a href="#" data-project-id="{{project_id}}" data-project-name="{{project_name}}" data-click-handler="TT.UI.filterByProject" data-hover-handler="TT.UI.storyProjectTooltip" class="project-name project-{{project_classname}}">{{project_initials}}</a>
-      {{{formatted_name}}}
+      <span class="formatted-title">{{{formatted_name}}}</span>
       <span class="owners">
         {{#initials}}
           <a href="#" class="story-owner" data-username="{{owned_by}}" data-click-handler="TT.UI.filterByUser" data-hover-handler="TT.UI.storyOwnerTooltip">{{initials}}</a>

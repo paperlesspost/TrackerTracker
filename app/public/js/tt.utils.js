@@ -235,6 +235,19 @@ TT.Utils = (function () {
     return pub.exists(obj) ? JSON.parse(obj) : {};
   };
 
+  pub.setBoundaryCallback = function (target, callback) {
+    var bounds = target.offset();
+    bounds.right = bounds.left + target.outerWidth();
+    bounds.bottom = bounds.top + target.outerHeight();
+
+    $('body').bind('mousemove.BoundaryCallback', function (e) {
+      if (e.pageX < bounds.left || e.pageX > bounds.right || e.pageY < bounds.top || e.pageY > bounds.bottom) {
+        $('body').unbind('mousemove.BoundaryCallback');
+        callback();
+      }
+    });
+  };
+
   pub.returnFalse = function () {
     return false;
   };

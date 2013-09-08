@@ -90,18 +90,18 @@ TT.UI = (function () {
   };
 
   pub.openFloatingStoryPreview = function () {
-    var story = getStoryFromContext(this);
-    var container = $('<div class="floating-story"></div>').appendTo('body');
     var offset = $(this).closest('.story').offset();
-    var win = $(window);
+    if (offset.top === 0 || offset.left === 0) {
+      return false;
+    }
 
-    TT.View.drawStoryHelper(story, container);
-    var storyElement = container.find('.story');
-    storyElement.addClass('expanded-story');
-    TT.View.drawStoryDetails(storyElement);
+    var story = getStoryFromContext(this);
+    var win = $(window);
+    var container = $('<div class="floating-story"></div>').appendTo('body');
+    TT.View.redrawFloatingStory(story);
 
     container.css({
-      left: Math.min(offset.left, win.width() - container.outerWidth() - 10),
+      left: Math.min(offset.left, win.width() - container.outerWidth() - 7),
       top: Math.min(win.height() / 2, offset.top)
     });
 
@@ -112,11 +112,11 @@ TT.UI = (function () {
     container.on('mouseenter', function () {
       clearTimeout(timeoutID);
     });
-    container.on('mouseleave', function () {
+    TT.Utils.setBoundaryCallback(container, function () {
       clearTimeout(timeoutID);
       timeoutID = setTimeout(function () {
         container.remove();
-      }, 300);
+      }, 250);
     });
   };
 
