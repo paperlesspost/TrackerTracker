@@ -90,6 +90,7 @@ TT.UI = (function () {
   };
 
   pub.openFloatingStoryPreview = function () {
+    $('.floating-story').remove();
     var offset = $(this).closest('.story').offset();
     if (offset.top === 0 || offset.left === 0) {
       return false;
