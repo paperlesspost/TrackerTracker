@@ -1,4 +1,5 @@
 var fs = require('fs');
+var _ = require('underscore')
 var pivotal = require('pivotal');
 var exec = require('child_process').exec;
 
@@ -7,6 +8,14 @@ var PIVOTAL_TOKEN_COOKIE = 'pivotalToken';
 var TEAMCITY_HOSTNAME_COOKIE = 'teamcityHostname';
 var TEAMCITY_USERNAME_COOKIE = 'teamcityUsername';
 var TEAMCITY_PASSWORD_COOKIE = 'teamcityPassword';
+
+function normalizePivotalResponse(obj, key) {
+  var response = {};
+  if (obj && obj[key]) {
+    response = _.isArray(obj[key]) ? obj[key] : [obj[key]];
+  }
+  return response;
+}
 
 exports.index = function (req, res) {
   fs.readFile('./fingerprint', function (err, data) {
@@ -26,8 +35,8 @@ exports.hasToken = function (req, res, next) {
 };
 
 exports.getProjects = function (req, res) {
-  pivotal.getProjects(function (err, results) {
-    res.json(results || {});
+  pivotal.getProjects(function (err, projects) {
+    res.json(normalizePivotalResponse(projects, 'project'));
   });
 };
 

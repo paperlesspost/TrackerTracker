@@ -377,15 +377,20 @@ TT.Init = (function () {
     TT.Ajax.start();
     var projects = TT.Utils.localStorage('projects');
 
+    // Temporary backwards compatibility:
+    if (projects && JSON.parse(projects).project) {
+      forceRefresh = true;
+    }
+
     if (projects && forceRefresh !== true) {
-      useProjectData(JSON.parse(projects).project);
+      useProjectData(JSON.parse(projects));
     } else {
       $.ajax({
         url: '/projects',
         success: function (projects) {
           projects = pub.reconcileProjectOrder(projects);
           TT.Utils.localStorage('projects', projects);
-          useProjectData(projects.project);
+          useProjectData(projects);
         }
       });
     }
@@ -417,7 +422,7 @@ TT.Init = (function () {
   };
 
   pub.addProjects = function (projects) {
-    $.each(TT.Utils.normalizePivotalArray(projects), function (index, project) {
+    $.each(projects, function (index, project) {
       TT.Model.Project.overwrite(project);
       if (project.memberships && project.memberships.membership) {
         var memberships = TT.Utils.normalizePivotalArray(project.memberships.membership);
@@ -462,9 +467,11 @@ TT.Init = (function () {
       return projects;
     }
     existing = JSON.parse(existing);
-    projects.project = TT.Utils.reconcileArrayOrder('id', existing.project, projects.project);
 
-    return projects;
+    // Temporary backwards compatibility
+    existing = existing.project ? existing.project : existing;
+
+    return TT.Utils.reconcileArrayOrder('id', existing, projects);
   };
 
   pub.setUpdateInterval = function () {

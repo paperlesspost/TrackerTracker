@@ -389,10 +389,10 @@ TT.View = (function () {
             url: '/projects',
             success: function (projects) {
               $(me).removeClass('updating');
-              if (projects && projects.project) {
+              if (projects) {
                 $(me).addClass('valid').removeClass('invalid');
                 TT.Utils.localStorage('projects', projects);
-                TT.Init.addProjects(projects.project);
+                TT.Init.addProjects(projects);
               } else {
                 $(me).addClass('invalid').removeClass('valid');
               }

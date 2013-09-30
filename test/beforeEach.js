@@ -19,100 +19,98 @@ TT.Mock = (function () {
   var pub = {};
 
   pub.projects = function () {
-    return {
-      project: [
-        {
-          id: "12345",
-          name: "Dummy Project",
-          labels: "green,red,blocked,passedqa,used_by_one_story,unused_label",
-          memberships: {
-            membership: [
-              {
-                id: "100",
-                person: {
-                  email: "nobody@example.com",
-                  name: "Product Manager",
-                  initials: "PM"
-                },
-                role: "Owner"
+    return [
+      {
+        id: "12345",
+        name: "Dummy Project",
+        labels: "green,red,blocked,passedqa,used_by_one_story,unused_label",
+        memberships: {
+          membership: [
+            {
+              id: "100",
+              person: {
+                email: "nobody@example.com",
+                name: "Product Manager",
+                initials: "PM"
               },
-              {
-                id: "101",
-                person: {
-                  email: "nobody@example.com",
-                  name: "Developer",
-                  initials: "DVL"
-                },
-                role: "Owner"
+              role: "Owner"
+            },
+            {
+              id: "101",
+              person: {
+                email: "nobody@example.com",
+                name: "Developer",
+                initials: "DVL"
               },
-              {
-                id: "102",
-                person: {
-                  email: "nobody@example.com",
-                  name: "QA Engineer",
-                  initials: "QA"
-                },
-                role: "Owner"
-              }
-            ]
-          }
-        },
-        {
-          id: "123456",
-          name: "Another Project",
-          labels: "green,red,blocked,passedqa,{ qa }",
-          memberships: {
-            membership: [
-              {
-                id: "100",
-                person: {
-                  email: "nobody@example.com",
-                  name: "Product Manager",
-                  initials: "PM"
-                },
-                role: "Owner"
+              role: "Owner"
+            },
+            {
+              id: "102",
+              person: {
+                email: "nobody@example.com",
+                name: "QA Engineer",
+                initials: "QA"
               },
-              {
-                id: "101",
-                person: {
-                  email: "nobody@example.com",
-                  name: "Developer",
-                  initials: "DVL"
-                },
-                role: "Owner"
-              }
-            ]
-          }
-        },
-        {
-          id: "1234567",
-          name: "Project Without Labels",
-          labels: {},
-          memberships: {
-            membership: [
-              {
-                id: "100",
-                person: {
-                  email: "nobody@example.com",
-                  name: "Product Manager",
-                  initials: "PM"
-                },
-                role: "Owner"
-              },
-              {
-                id: "101",
-                person: {
-                  email: "nobody@example.com",
-                  name: "Developer",
-                  initials: "DVL"
-                },
-                role: "Owner"
-              }
-            ]
-          }
+              role: "Owner"
+            }
+          ]
         }
-      ]
-    };
+      },
+      {
+        id: "123456",
+        name: "Another Project",
+        labels: "green,red,blocked,passedqa,{ qa }",
+        memberships: {
+          membership: [
+            {
+              id: "100",
+              person: {
+                email: "nobody@example.com",
+                name: "Product Manager",
+                initials: "PM"
+              },
+              role: "Owner"
+            },
+            {
+              id: "101",
+              person: {
+                email: "nobody@example.com",
+                name: "Developer",
+                initials: "DVL"
+              },
+              role: "Owner"
+            }
+          ]
+        }
+      },
+      {
+        id: "1234567",
+        name: "Project Without Labels",
+        labels: {},
+        memberships: {
+          membership: [
+            {
+              id: "100",
+              person: {
+                email: "nobody@example.com",
+                name: "Product Manager",
+                initials: "PM"
+              },
+              role: "Owner"
+            },
+            {
+              id: "101",
+              person: {
+                email: "nobody@example.com",
+                name: "Developer",
+                initials: "DVL"
+              },
+              role: "Owner"
+            }
+          ]
+        }
+      }
+    ];
   };
 
   pub.iterations_12345 = function () {

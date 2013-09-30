@@ -303,9 +303,9 @@ TT.UI = (function () {
         var newIndex = $('#autocomplete .list .item').index(ui.item);
         var oldIndex = $(ui.item).data('oldIndex');
         var projects = JSON.parse(TT.Utils.localStorage('projects'));
-        projects.project = TT.Utils.arrayMove(TT.Utils.normalizePivotalArray(projects.project), oldIndex, newIndex);
+        projects = TT.Utils.arrayMove(projects, oldIndex, newIndex);
         TT.Model.Project.move(oldIndex, newIndex);
-        TT.View.drawProjectList(projects.project);
+        TT.View.drawProjectList(projects);
         TT.Init.setInactiveProjects();
         TT.Utils.localStorage('projects', projects);
       }
