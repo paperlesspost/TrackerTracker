@@ -407,8 +407,8 @@ TT.Init = (function () {
         url: '/iterations',
         data: { projectID: project.id },
         success: function (iterations) {
-          if (iterations && iterations.iteration) {
-            pub.addIterations(project, iterations.iteration);
+          if (iterations) {
+            pub.addIterations(project, iterations);
             TT.View.drawStories();
           } else {
             var note = 'Invalid response from the server. Did you enter the right token?';
@@ -441,7 +441,7 @@ TT.Init = (function () {
   pub.addIterations = function (project, iterations) {
     // This assumes first iteration is always current.
     var normalized_iteration = 0;
-    $.each(TT.Utils.normalizePivotalArray(iterations), function (index, iteration) {
+    $.each(iterations, function (index, iteration) {
       TT.Model.Iteration.overwrite({
         project_name: project.name,
         id: project.id + '.' + iteration.id,

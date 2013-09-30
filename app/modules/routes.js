@@ -41,8 +41,8 @@ exports.getProjects = function (req, res) {
 };
 
 exports.getIterations = function (req, res) {
-  pivotal.getCurrentBacklogIterations(req.query.projectID, function (err, results) {
-    res.json(results || {});
+  pivotal.getCurrentBacklogIterations(req.query.projectID, function (err, iterations) {
+    res.json(normalizePivotalResponse(iterations, 'iteration'));
   });
 };
 
