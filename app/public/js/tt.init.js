@@ -526,7 +526,7 @@ TT.Init = (function () {
     pub.resetUI();
 
     var projects = TT.Utils.localStorage('projects') || {};
-    TT.View.drawProjectList(JSON.parse(projects).project);
+    TT.View.drawProjectList(JSON.parse(projects));
     pub.setInactiveProjects();
 
     TT.View.drawStories();
