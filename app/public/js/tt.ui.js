@@ -46,9 +46,35 @@ TT.UI = (function () {
 
   // From the Autocomplete selector
   pub.toggleProjectVisibility = function () {
-    var id = $(this).closest('.project-controls').data('id');
-    $(this).closest('.project-controls').toggleClass('active');
-    $('#project-' + id).click();
+    var controls = $(this).closest('.project-controls');
+    var id = controls.data('id');
+    var projectTab = $('#project-' + id);
+
+    if (controls.hasClass('disabled')) {
+      return false;
+    }
+
+    controls.toggleClass('active');
+    projectTab.click();
+    $(window).trigger('workspaceUpdate');
+
+    return false;
+  };
+
+  pub.toggleProjectStatus = function () {
+    var controls = $(this).closest('.project-controls');
+    var id = controls.data('id');
+    var projectTab = $('#project-' + id);
+
+    if (projectTab.hasClass('active') && !projectTab.hasClass('disabled')) {
+      controls.removeClass('active');
+      projectTab.click();
+      $(window).trigger('workspaceUpdate');
+    }
+
+    controls.toggleClass('disabled');
+    projectTab.toggleClass('disabled');
+    TT.View.drawStories();
 
     return false;
   };
@@ -285,6 +311,12 @@ TT.UI = (function () {
       noActive: true
     });
 
+    $('#autocomplete .project-controls .project-status-checkbox').each(function () {
+      if (!$(this).closest('.project-controls').hasClass('disabled')) {
+        $(this).attr('checked', 'checked');
+      }
+    });
+
     pub.initProjectAutoCompleteSortable();
 
     return false;
@@ -307,6 +339,7 @@ TT.UI = (function () {
         TT.Model.Project.move(oldIndex, newIndex);
         TT.View.drawProjectList(projects);
         TT.Init.setInactiveProjects();
+        TT.Init.setDisabledProjects();
         TT.Utils.localStorage('projects', projects);
       }
     });

@@ -242,6 +242,10 @@ body.ajaxRunning #logo h1 {
   color: #fff;
 }
 
+.project.disabled {
+  display: none;
+}
+
 /* Account Nav */
 
 #account {
@@ -1741,11 +1745,20 @@ input.textfield.autocomplete {
   font-weight: bold;
 }
 
+.project-controls.disabled strong {
+  color: #bbb;
+  cursor: move;
+}
+
 a.tracker-project-link {
   background: url(/images/external-link.png) no-repeat scroll right center transparent;
   float: right;
   height: 11px;
   width: 16px;
+}
+
+.project-controls.disabled .project-visibility-toggle {
+  display: none;
 }
 
 .project-visibility-toggle {
@@ -1755,15 +1768,23 @@ a.tracker-project-link {
   border-radius: 6px;
   height: 17px;
   float: left;
-  left: -3px;
+  left: -2px;
   margin-right: 4px;
   position: relative;
-  top: -2px;
+  top: -1px;
   width: 57px;
 }
 
 .active .project-visibility-toggle {
   background-position: 0 0;
+}
+
+.project-status-checkbox {
+  float: left;
+  margin-right: 11px;
+  position: relative;
+  top: 3px;
+  left: 1px;
 }
 
 /* TeamCity */

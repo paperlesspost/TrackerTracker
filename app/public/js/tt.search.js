@@ -65,6 +65,10 @@ TT.Search = (function () {
     }
 
     TT.Model.Project.each(function (index, project) {
+      if ($('#project-' + project.id).hasClass('disabled')) {
+        return false;
+      }
+
       TT.Ajax.start();
       $.ajax({
         url: '/stories',
