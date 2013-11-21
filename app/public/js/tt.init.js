@@ -364,12 +364,24 @@ TT.Init = (function () {
     }
   };
 
+  pub.setDisabledProjects = function () {
+    var projectList = TT.Utils.localStorage('projectDisabledList');
+
+    $('#projects .project').removeClass('disabled');
+    if (projectList) {
+      $.each(JSON.parse(projectList), function (index, id) {
+        $('#project-' + id).addClass('disabled');
+      });
+    }
+  };
+
   pub.requestProjectsAndIterations = function (forceRefresh) {
     function useProjectData(projects) {
       TT.Ajax.end();
       pub.addProjects(projects);
       TT.View.drawProjectList(projects);
       pub.setInactiveProjects();
+      pub.setDisabledProjects();
       pub.requestAllIterations();
       pub.requestIceboxSample();
     }
@@ -402,6 +414,10 @@ TT.Init = (function () {
 
   pub.requestAllIterations = function () {
     TT.Model.Project.each(function (index, project) {
+      if ($('#project-' + project.id).hasClass('disabled')) {
+        return false;
+      }
+
       TT.Ajax.start();
       $.ajax({
         url: '/iterations',
@@ -528,6 +544,7 @@ TT.Init = (function () {
     var projects = TT.Utils.localStorage('projects') || {};
     TT.View.drawProjectList(JSON.parse(projects));
     pub.setInactiveProjects();
+    pub.setDisabledProjects();
 
     TT.View.drawStories();
   };

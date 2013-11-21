@@ -231,6 +231,7 @@ TT.View = (function () {
 
   pub.drawStories = function () {
     pub.setProjectActiveState();
+    pub.setProjectDisabilityState();
     pub.clearStories();
 
     TT.Model.Column.each(function (index, column) {
@@ -267,6 +268,23 @@ TT.View = (function () {
     });
 
     TT.Utils.localStorage('projectList', projectList);
+  };
+
+  pub.setProjectDisabilityState = function () {
+    var projectList = [];
+    $('#projects .project').each(function () {
+      var id = $(this).data('project-id');
+      var isDisabled = $(this).hasClass('disabled');
+      TT.Model.Project.update({ id: id }, {
+        disabled: isDisabled,
+        status: isDisabled ? 'on' : ''
+      });
+      if (isDisabled) {
+        projectList.push(id);
+      }
+    });
+
+    TT.Utils.localStorage('projectDisabledList', projectList);
   };
 
   pub.restoreStoryState = function (element, story) {
