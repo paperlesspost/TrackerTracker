@@ -46,10 +46,11 @@ TT.Autocomplete = (function () {
     pub.target = $(options.target);
 
     if (pub.options.showInput) {
-      pub.input = $('#autocomplete-input').show().focus();
+      pub.input = $('#autocomplete-input').show();
       if (pub.options.value) {
         pub.input.val(pub.options.value);
       }
+      pub.input.focus().select();
     } else {
       if (pub.options.noActive) {
         $('#autocomplete-input').show().css({ position: 'absolute', top: '-9999px' }).focus().blur(pub.onInputBlur);
@@ -178,7 +179,7 @@ TT.Autocomplete = (function () {
 
     if (active.length) {
       var index = 0;
-      var offset = Math.round(($('#autocomplete .list').outerHeight() / active.outerHeight()) / 2);
+      var offset = Math.floor(($('#autocomplete .list').outerHeight() / active.outerHeight()) / 3);
 
       $('#autocomplete .item:visible').filter(function (i) {
         if ($(this).hasClass('active')) {
