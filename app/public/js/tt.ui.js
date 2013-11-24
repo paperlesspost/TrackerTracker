@@ -148,12 +148,12 @@ TT.UI = (function () {
     var timeoutID;
     container.on('mouseenter', function () {
       clearTimeout(timeoutID);
-    });
-    TT.Utils.setBoundaryCallback(container, function () {
-      clearTimeout(timeoutID);
-      timeoutID = setTimeout(function () {
-        $('.floating-story').unbind('mouseenter').remove();
-      }, 250);
+      TT.Utils.setBoundaryCallback(container, function () {
+        clearTimeout(timeoutID);
+        timeoutID = setTimeout(function () {
+          $('.floating-story').unbind('mouseenter').remove();
+        }, 250);
+      });
     });
   };
 

@@ -240,10 +240,11 @@ TT.Utils = (function () {
     bounds.right = bounds.left + target.outerWidth();
     bounds.bottom = bounds.top + target.outerHeight();
 
-    $('body').bind('mousemove.BoundaryCallback', function (e) {
+    $('body').unbind('.BoundaryCallback')
+      .bind('mousemove.BoundaryCallback', function (e) {
       if (e.pageX < bounds.left || e.pageX > bounds.right ||
         e.pageY < bounds.top || e.pageY > bounds.bottom) {
-        $('body').unbind('mousemove.BoundaryCallback');
+        $('body').unbind('.BoundaryCallback');
         callback();
       }
     });
