@@ -61,9 +61,6 @@
   </div>
   <h2>Activity {{#has_images}}<a href="https://www.pivotaltracker.com/projects/{{project_id}}/stories/{{id}}/images" class="view-all-images external" target="_blank">View all images</a>{{/has_images}}</h2>
   <div class="notes">
-    <div class="add-note note textfield" data-click-handler="TT.UI.addStoryNote">
-      <span class="ghost">Add a note</span>
-    </div>
     {{#notes}}
       <div class="note">
         <div class="author">{{author}}</div>
@@ -92,6 +89,9 @@
         <div class="date">{{noted_at}}</div>
       </div>
     {{/notes}}
+    <div class="add-note note textfield" data-click-handler="TT.UI.addStoryNote">
+      <span class="ghost">Add a note</span>
+    </div>
   </div>
   <div class="dates">
     <div class="created-at"><strong>Created</strong> {{created_at}}</div>
