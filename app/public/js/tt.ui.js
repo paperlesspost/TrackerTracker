@@ -302,7 +302,6 @@ TT.UI = (function () {
 
     TT.Autocomplete.open({
       applyOnClick: false,
-      closeOnInputBlur: false,
       customTopOffset: 4,
       items: items,
       target: this,
