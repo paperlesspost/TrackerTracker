@@ -52,6 +52,29 @@ TT.Tooltip = (function () {
     }
   };
 
+  pub.init = function () {
+    var timeoutID;
+    $('body').mousemove(function (e) {
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(function () {
+        var target = $(e.target);
+        target = target.closest('[data-tooltip]');
+
+        var text = target.data('tooltip');
+        if (text) {
+          pub.open({
+            target: target,
+            delay: target.data('tooltip-delay') || 400,
+            html: TT.View.render('tooltipContents', {
+              title: text,
+              description: target.data('tooltip-description') || ''
+            })
+          });
+        }
+      }, 50);
+    });
+  };
+
   return pub;
 
 }());

@@ -792,34 +792,6 @@ TT.UI = (function () {
     return false;
   };
 
-  pub.storyProjectTooltip = function () {
-    return pub.genericStoryTooltip(this, 'Project: ' + $(this).data('project-name'));
-  };
-
-  pub.storyOwnerTooltip = function () {
-    return pub.genericStoryTooltip(this, 'Owner: ' + $(this).data('username'));
-  };
-
-  pub.storyPairTooltip = function () {
-    return pub.genericStoryTooltip(this, 'Pair: ' + $(this).data('username'));
-  };
-
-  pub.storyQATooltip = function () {
-    return pub.genericStoryTooltip(this, 'QA: ' + $(this).data('username'));
-  };
-
-  pub.genericStoryTooltip = function (context, title) {
-    if (!TT.Tooltip.isActive()) {
-      TT.Tooltip.open({
-        target: context,
-        delay: 500,
-        html: TT.View.render('tooltipContents', { title: title })
-      });
-    }
-
-    return false;
-  };
-
   pub.fireEventHandler = function (target, eventType, e) {
     var handler = target.data(eventType);
     if (handler) {
@@ -840,7 +812,7 @@ TT.UI = (function () {
       }
 
       target = target.closest('[data-click-handler]');
-      pub.fireEventHandler(target, 'click-handler', e);
+      return pub.fireEventHandler(target, 'click-handler', e);
     });
   };
 
