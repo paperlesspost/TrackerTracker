@@ -241,7 +241,8 @@ TT.Utils = (function () {
     bounds.bottom = bounds.top + target.outerHeight();
 
     $('body').bind('mousemove.BoundaryCallback', function (e) {
-      if (e.pageX < bounds.left || e.pageX > bounds.right || e.pageY < bounds.top || e.pageY > bounds.bottom) {
+      if (e.pageX < bounds.left || e.pageX > bounds.right ||
+        e.pageY < bounds.top || e.pageY > bounds.bottom) {
         $('body').unbind('mousemove.BoundaryCallback');
         callback();
       }

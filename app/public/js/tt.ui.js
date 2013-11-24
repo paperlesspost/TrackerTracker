@@ -125,7 +125,8 @@ TT.UI = (function () {
   };
 
   pub.openFloatingStoryPreview = function () {
-    $('.floating-story').remove();
+    $('.floating-story').unbind('mouseenter').remove();
+
     var offset = $(this).closest('.story').offset();
     if (offset.top === 0 || offset.left === 0) {
       return false;
@@ -151,7 +152,7 @@ TT.UI = (function () {
     TT.Utils.setBoundaryCallback(container, function () {
       clearTimeout(timeoutID);
       timeoutID = setTimeout(function () {
-        container.remove();
+        $('.floating-story').unbind('mouseenter').remove();
       }, 250);
     });
   };
