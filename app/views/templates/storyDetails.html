@@ -3,40 +3,47 @@
     <h2>Title</h2>
     <div class="title textfield" data-click-handler="TT.UI.editStoryTitle">{{{formatted_name}}}</div>
   </div>
-  <div class="detail-set">
-    <div class="detail"><label>Story ID</label> <a href="{{url}}" class="external" target="_blank">{{id}}</a></div>
-    {{#buildStatus}}
-      <div class="detail">
-        <label>TeamCity</label> {{{buildStatus}}}
+  <div class="detail-set clearfix">
+    <div class="detail-set-left-column">
+      <div class="detail story-id">
+        <label>Story ID</label>
+        <input data-click-handler="TT.UI.selectText" readonly="true" value="{{id}}" /> <a href="{{url}}" class="external" target="_blank"></a>
       </div>
-    {{/buildStatus}}
-    <div class="detail">
-      <label>Requester</label>
-      <span class="editable story-requester" data-click-handler="TT.UI.openStoryRequesterUpdater">{{requested_by}}</span>
+      <div class="detail">
+        <label>Requester</label>
+        <span class="editable story-requester" data-click-handler="TT.UI.openStoryRequesterUpdater">{{requested_by}}</span>
+      </div>
+      <div class="detail">
+        <label>Owner</label>
+        <span class="editable story-owner" data-click-handler="TT.UI.openStoryOwnerUpdater">{{owned_by}}{{^owned_by}}<em>none</em>{{/owned_by}}</span>
+      </div>
+      <div class="detail">
+        <label>Pair</label>
+        <span class="editable story-pair" data-click-handler="TT.UI.openStoryPairUpdater">{{pair}}{{^pair}}<em>none</em>{{/pair}}</span>
+      </div>
+      <div class="detail">
+        <label>QA</label>
+        <span class="editable story-qa" data-click-handler="TT.UI.openStoryQAUpdater">{{qa}}{{^qa}}<em>none</em>{{/qa}}</span>
+      </div>
     </div>
-    <div class="detail">
-      <label>Owner</label>
-      <span class="editable story-owner" data-click-handler="TT.UI.openStoryOwnerUpdater">{{owned_by}}{{^owned_by}}<em>none</em>{{/owned_by}}</span>
-    </div>
-    <div class="detail">
-      <label>Pair</label>
-      <span class="editable story-pair" data-click-handler="TT.UI.openStoryPairUpdater">{{pair}}{{^pair}}<em>none</em>{{/pair}}</span>
-    </div>
-    <div class="detail">
-      <label>QA</label>
-      <span class="editable story-qa" data-click-handler="TT.UI.openStoryQAUpdater">{{qa}}{{^qa}}<em>none</em>{{/qa}}</span>
-    </div>
-    <div class="detail">
-      <label>Points</label>
-      <span class="editable story-points" data-click-handler="TT.UI.openStoryPointsUpdater">{{estimate}}</span>
-    </div>
-    <div class="detail">
-      <label>Type</label>
-      <span class="editable story-type" data-click-handler="TT.UI.openStoryTypeUpdater">{{story_type}}</span>
-    </div>
-    <div class="detail last">
-      <label>State</label>
-      <span class="editable story-state" data-click-handler="TT.UI.openStoryStateUpdater">{{current_state}}</span>
+    <div class="detail-set-right-column">
+      <div class="detail">
+        <label>Type</label>
+        <span class="editable story-type" data-click-handler="TT.UI.openStoryTypeUpdater">{{story_type}}</span>
+      </div>
+      <div class="detail">
+        <label>Points</label>
+        <span class="editable story-points" data-click-handler="TT.UI.openStoryPointsUpdater">{{estimate}}</span>
+      </div>
+      <div class="detail">
+        <label>State</label>
+        <span class="editable story-state" data-click-handler="TT.UI.openStoryStateUpdater">{{current_state}}</span>
+      </div>
+      {{#buildStatus}}
+        <div class="detail">
+          <label>TeamCity</label> {{{buildStatus}}}
+        </div>
+      {{/buildStatus}}
     </div>
   </div>
   <div class="description-container">

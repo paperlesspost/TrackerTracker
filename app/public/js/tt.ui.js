@@ -115,6 +115,15 @@ TT.UI = (function () {
     // intentionally not returning false here to continue event bubbling
   };
 
+  pub.selectText = function () {
+    var element = $(this).select();
+    setTimeout(function () {
+      element.select();
+    }, 0);
+
+    return false;
+  };
+
   pub.openFloatingStoryPreview = function () {
     $('.floating-story').remove();
     var offset = $(this).closest('.story').offset();

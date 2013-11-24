@@ -826,9 +826,14 @@ body.has-modal-dialog {
   margin: 6px 0 0;
 }
 
+.story .detail-set-left-column,
+.story .detail-set-right-column {
+  float: left;
+}
+
 .story .detail {
   border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
-  padding: 5px 6px 3px;
+  padding: 5px 10px 3px 6px;
 }
 
 .story .detail.is-updating {
@@ -839,6 +844,25 @@ body.has-modal-dialog {
 .story .detail a.external {
   padding-bottom: 1px;
   padding-top: 1px;
+}
+
+.story .story-id a {
+  display: inline-block;
+  height: 10px;
+  padding-right: 2px;
+  width: 10px;
+}
+
+.story .story-id input {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  font-weight: bold;
+  margin-top: -2px;
+  padding: 2px 0;
+  text-align: center;
+  width: 72px;
 }
 
 .story .detail label {
@@ -857,6 +881,10 @@ body.has-modal-dialog {
   font-weight: bold;
   min-height: 4px;
   padding: 1px 15px 1px 0;
+}
+
+.story .detail span.editable:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .story .detail.last {
@@ -1193,7 +1221,7 @@ body.has-modal-dialog {
 }
 
 .floating-story .expanded-story .title-container h2 {
-  display: none;
+  margin: 6px 0 0;
 }
 
 /* Autocomplete */
