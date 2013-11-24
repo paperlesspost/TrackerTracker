@@ -809,6 +809,9 @@ TT.UI = (function () {
       // Handle links in textareas
       if (target.is('a') && target.attr('href') !== '#' &&
         !target.data('click-handler')) {
+        if (target.attr('href').toLowerCase().indexOf('http') === 0) {
+          target.attr('target', '_blank');
+        }
         return;
       }
 
