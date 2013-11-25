@@ -66,17 +66,11 @@ TT.UI = (function () {
     var id = controls.data('id');
     var projectTab = $('#project-' + id);
 
-    if (projectTab.hasClass('active') && !projectTab.hasClass('disabled')) {
-      controls.removeClass('active');
-      projectTab.click();
-      $(window).trigger('workspaceUpdate');
-    }
-
     controls.toggleClass('disabled');
     projectTab.toggleClass('disabled');
     TT.View.drawStories();
 
-    return false;
+    return; // let checkbox toggle naturally
   };
 
   pub.refreshProjects = function () {

@@ -236,15 +236,15 @@ TT.Utils = (function () {
   };
 
   pub.setBoundaryCallback = function (target, callback) {
+    var now = new Date().getTime();
     var bounds = target.offset();
     bounds.right = bounds.left + target.outerWidth();
     bounds.bottom = bounds.top + target.outerHeight();
 
-    $('body').unbind('.BoundaryCallback')
-      .bind('mousemove.BoundaryCallback', function (e) {
+    $('body').bind('mousemove.BoundaryCallback' + now, function (e) {
       if (e.pageX < bounds.left || e.pageX > bounds.right ||
         e.pageY < bounds.top || e.pageY > bounds.bottom) {
-        $('body').unbind('.BoundaryCallback');
+        $('body').unbind('mousemove.BoundaryCallback' + now);
         callback();
       }
     });

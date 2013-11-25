@@ -1,4 +1,4 @@
 <div class="project-controls {{#disabled}}disabled{{/disabled}} {{#active}}active{{/active}}" data-id="{{id}}">
   <input type="checkbox" class="project-status-checkbox" data-click-handler="TT.UI.toggleProjectStatus" />
-  <a href="#" data-click-handler="TT.UI.toggleProjectVisibility" class="project-visibility-toggle"></a> <strong data-click-handler="TT.UI.toggleProjectVisibility">{{name}}</strong> <a href="http://www.pivotaltracker.com/projects/{{id}}" target="_blank" class="tracker-project-link"></a>
+  <a href="#" data-click-handler="TT.UI.toggleProjectVisibility" class="project-visibility-toggle"></a> <strong>{{name}}</strong> <a href="http://www.pivotaltracker.com/projects/{{id}}" target="_blank" class="tracker-project-link" data-tooltip="Go to the {{name}} Project" data-tooltip-description="http://www.pivotaltracker.com/projects/{{id}}"></a>
 </div>

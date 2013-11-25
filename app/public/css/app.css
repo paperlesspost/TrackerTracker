@@ -1761,7 +1761,6 @@ input.textfield.autocomplete {
 
 .project-controls strong {
   font-weight: normal;
-  cursor: pointer;
   display: inline-block;
   max-width: 180px;
   overflow-x: hidden;
