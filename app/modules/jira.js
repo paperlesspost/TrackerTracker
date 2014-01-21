@@ -1,7 +1,9 @@
 var url = require('url');
 var fs = require('fs');
 
-var pivotal = require('pivotal');
+var Pivotal = require('pivotal');
+var pivotal = typeof Pivotal === 'function' ? new Pivotal() : Pivotal;
+
 var request = require('request');
 var JiraApi = require('jira').JiraApi;
 var importer = require('./importer.js');

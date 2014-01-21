@@ -1,6 +1,7 @@
 var fs = require('fs');
 var _ = require('underscore')
-var pivotal = require('pivotal');
+var Pivotal = require('pivotal');
+var pivotal = typeof Pivotal === 'function' ? new Pivotal() : Pivotal;
 var exec = require('child_process').exec;
 
 var TWO_YEARS = 2 * 365 * 24 * 60 * 60 * 1000;

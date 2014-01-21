@@ -15,7 +15,7 @@
     "hogan.js": "2.0.0",
     "jade": "0.28.1",
     "jira": "git://github.com/intentmedia/node-jira.git#master",
-    "pivotal": "git://github.com/Wizcorp/node-pivotal.git#8e0a20fbacf919fdcd47cac2a97daf01305f11db",
+    "pivotal": "git://github.com/Wizcorp/node-pivotal.git#75f5be1ba71b1c116867346a9777b594191e341e",
     "redis": "0.8.2",
     "request": "2.14.0",
     "grunt": "0.4.0",
