@@ -121,7 +121,7 @@ TrackerTracker has been tested and built for Chrome, Safari, and Firefox. It see
 ## Contributors
 
 * Andrew Childs ([@andrewchilds](http://twitter.com/andrewchilds))
-* Adrian Cretu-Barbul ([@adriancb](http://twitter.com/adriancb))
+* Adrian CB ([@adriancb](http://twitter.com/adriancb))
 * Kurt Schrader ([@kurt](http://twitter.com/kurt))
 * John Whitfield ([@jkwhitfield](http://twitter.com/jkwhitfield))
 * James Cartledge ([jcartledge](https://github.com/jcartledge))
