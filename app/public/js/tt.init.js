@@ -172,7 +172,7 @@ TT.Init = (function () {
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
-      },
+      }
     });
 
     // Story is in ready for Production.
