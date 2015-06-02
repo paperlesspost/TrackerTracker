@@ -49,7 +49,7 @@ TT.Init = (function () {
       active: true,
       filter: function (story) {
         return story.current_iteration === 0 && (
-          story.current_state === "unstarted" || story.current_state === 'planned');
+          story.current_state === 'unstarted' || story.current_state === 'planned');
       },
       onDragIn: function (story) {
         return { current_state: 'unstarted' };
