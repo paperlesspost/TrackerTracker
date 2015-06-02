@@ -680,10 +680,12 @@ body.has-modal-dialog {
 }
 
 .story.blocked {
-  opacity: 0.5;
+  background-color: #D87F7F;
+  opacity: 0.75;
 }
 
 .story.blocked.expanded-story {
+  background-color: #eee;
   opacity: 1.0;
 }
 
