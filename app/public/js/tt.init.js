@@ -94,6 +94,28 @@ TT.Init = (function () {
       }
     });
 
+    // Story is in Current, delivered, and needs design signoff.
+    TT.Model.Column.add({
+      name: 'Ready for PD',
+      active: false,
+      filter: function (story) {
+        return story.current_iteration === 0 &&
+               story.current_state === 'delivered' &&
+               TT.Model.Story.hasTag(story, 'needs design signoff');
+      },
+      onDragIn: function (story) {
+        return {
+          current_state: 'delivered',
+          labels: TT.Model.Story.addTag(story, 'needs design signoff').labels,
+          owned_by: story.owned_by || TT.Utils.getUsername(),
+          estimate: story.estimate || '0'
+        };
+      },
+      onDragOut: function (story) {
+        return { labels: TT.Model.Story.removeTag(story, 'needs design signoff').labels };
+      }
+    });
+
     TT.Model.Column.add({
       name: 'Finished',
       active: true,
