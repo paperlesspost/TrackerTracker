@@ -34,6 +34,24 @@ TT.Init = (function () {
   */
 
   pub.preloadColumns = function () {
+    // Story is in the Pivotal IceBox.
+    TT.Model.Column.add({
+      name: 'Icebox',
+      active: false,
+      template: function () {
+        return TT.View.render('emptyIcebox');
+      },
+      filter: function (story) {
+        return story.current_state === 'unscheduled';
+      },
+      onDragIn: function (story) {
+        return { current_state: 'unscheduled' };
+      },
+      onDragOut: function (story) {
+        return { current_state: 'unstarted' };
+      }
+    });
+
     // Story is in the Pivotal Backlog.
     TT.Model.Column.add({
       name: 'Backlog',
@@ -228,23 +246,6 @@ TT.Init = (function () {
           var w = $(this).data('stories') + $(this).data('points');
           $(this).width(w * 2);
         });
-      }
-    });
-
-    TT.Model.Column.add({
-      name: 'Icebox',
-      active: false,
-      template: function () {
-        return TT.View.render('emptyIcebox');
-      },
-      filter: function (story) {
-        return story.current_state === 'unscheduled';
-      },
-      onDragIn: function (story) {
-        return { current_state: 'unscheduled' };
-      },
-      onDragOut: function (story) {
-        return { current_state: 'unstarted' };
       }
     });
 
