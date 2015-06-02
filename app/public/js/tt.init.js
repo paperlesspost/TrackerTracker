@@ -5,61 +5,63 @@ TT.Init = (function () {
 
   pub.firstRun = true;
 
-  // bootstrap functions
+  /* Information regarding Stories and Iterations :
+
+     ================================================================
+
+     Stories from Pivotal will be in one of the following states:
+       accepted
+       delivered
+       finished
+       rejected
+       started
+       planned
+       unscheduled => Stories in Icebox will have this state.
+       unstarted
+
+     ================================================================
+
+     Iterations are normalized via the TT JavaScript. This means that
+     the current iteration, if defined, is set to 0, with additional
+     interations starting at 1 and increasing. In other words:
+
+     current_iteration === undefined
+     ==> Story is in the Icebox (no iteration defined).
+     current_iteration === 0
+     ==> Story is in Current (iteration in Pivotal).
+     current_iteration !== 0
+     ==> Story is in a future iteration (not current).
+  */
 
   pub.preloadColumns = function () {
-    // Readymade columns
-    // TODO: Allow creating & saving custom columns and layouts
-
+    // Story is in the Pivotal Backlog.
     TT.Model.Column.add({
-      name: 'Labels',
-      active: false,
-      sortable: false,
-      template: function () {
-        var labels = TT.Utils.sortByProperty(TT.Model.Label.find({ active: true }), 'name');
-        return TT.View.render('epics', { labels: labels });
-      },
-      afterTemplateRender: function () {
-        $('.epic').each(function () {
-          var w = $(this).data('stories') + $(this).data('points');
-          $(this).width(w * 2);
-        });
-      }
-    });
-
-    TT.Model.Column.add({
-      name: 'Icebox',
-      active: false,
-      template: function () {
-        return TT.View.render('emptyIcebox');
-      },
+      name: 'Backlog',
+      active: true,
       filter: function (story) {
-        return story.current_state === 'unscheduled';
-      },
-      onDragIn: function (story) {
-        return { current_state: 'unscheduled' };
-      },
-      onDragOut: function (story) {
-        return { current_state: 'unstarted' };
+        return story.current_iteration !== 0 && story.current_state === 'unstarted';
       }
     });
 
+    // Story is in Current and has not been started.
     TT.Model.Column.add({
       name: 'Unstarted',
       active: true,
       filter: function (story) {
-        return story.current_state === 'unstarted';
+        return story.current_iteration === 0 && (
+          story.current_state === "unstarted" || story.current_state === 'planned');
       },
       onDragIn: function (story) {
         return { current_state: 'unstarted' };
       }
     });
 
+    // Story is in Current and has been started.
     TT.Model.Column.add({
-      name: 'Started',
+      name: 'In Dev',
       active: true,
       filter: function (story) {
-        return story.current_state === 'started';
+        return story.current_iteration === 0 && story.current_state === 'started';
       },
       onDragIn: function (story) {
         return {
@@ -169,6 +171,41 @@ TT.Init = (function () {
     });
 
     /*
+    Currently unused but potentially useful column additions:
+
+    TT.Model.Column.add({
+      name: 'Labels',
+      active: false,
+      sortable: false,
+      template: function () {
+        var labels = TT.Utils.sortByProperty(TT.Model.Label.find({ active: true }), 'name');
+        return TT.View.render('epics', { labels: labels });
+      },
+      afterTemplateRender: function () {
+        $('.epic').each(function () {
+          var w = $(this).data('stories') + $(this).data('points');
+          $(this).width(w * 2);
+        });
+      }
+    });
+
+    TT.Model.Column.add({
+      name: 'Icebox',
+      active: false,
+      template: function () {
+        return TT.View.render('emptyIcebox');
+      },
+      filter: function (story) {
+        return story.current_state === 'unscheduled';
+      },
+      onDragIn: function (story) {
+        return { current_state: 'unscheduled' };
+      },
+      onDragOut: function (story) {
+        return { current_state: 'unstarted' };
+      }
+    });
+
     TT.Model.Column.add({
       name: 'Current',
       active: false,
@@ -176,16 +213,7 @@ TT.Init = (function () {
         return story.current_iteration === 0;
       }
     });
-
-    TT.Model.Column.add({
-      name: 'Backlog',
-      active: false,
-      filter: function (story) {
-        return story.current_iteration !== 0;
-      }
-    });
     */
-
   };
 
   pub.preloadFilters = function () {
