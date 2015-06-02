@@ -37,7 +37,7 @@ TT.Init = (function () {
     // Story is in the Pivotal Backlog.
     TT.Model.Column.add({
       name: 'Backlog',
-      active: true,
+      active: false,
       filter: function (story) {
         return story.current_iteration !== 0 && story.current_state === 'unstarted';
       }
@@ -97,7 +97,7 @@ TT.Init = (function () {
     // Story is in Current, delivered, and needs design signoff.
     TT.Model.Column.add({
       name: 'Ready for PD',
-      active: false,
+      active: true,
       filter: function (story) {
         return story.current_iteration === 0 &&
                story.current_state === 'delivered' &&
@@ -116,62 +116,53 @@ TT.Init = (function () {
       }
     });
 
+    // Story is in Current, delivered, and ready for QA.
     TT.Model.Column.add({
-      name: 'Finished',
+      name: 'Ready for QA',
       active: true,
       filter: function (story) {
-        return story.current_state === 'finished';
+        return story.current_iteration === 0 &&
+               story.current_state === 'delivered' &&
+               TT.Model.Story.hasTag(story, 'ready for qa');
       },
       onDragIn: function (story) {
         return {
-          current_state: 'finished',
+          current_state: 'delivered',
+          labels: TT.Model.Story.addTag(story, 'ready for qa').labels,
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
+      },
+      onDragOut: function (story) {
+        return { labels: TT.Model.Story.removeTag(story, 'ready for qa').labels };
       }
     });
 
+    // Story is in Current, delivered, and in QA.
     TT.Model.Column.add({
       name: 'In QA',
-      active: false,
+      active: true,
       filter: function (story) {
-        return story.current_state === 'finished' && !TT.Model.Story.hasTag(story, 'passedqa');
+        return story.current_iteration === 0 &&
+               story.current_state === 'delivered' &&
+               TT.Model.Story.hasTag(story, 'in qa');
       },
       onDragIn: function (story) {
         return {
-          current_state: 'finished',
-          labels: TT.Model.Story.addTag(story, 'inqa').labels,
+          current_state: 'delivered',
+          labels: TT.Model.Story.addTag(story, 'in qa').labels,
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
       },
       onDragOut: function (story) {
-        return { labels: TT.Model.Story.removeTag(story, 'inqa').labels };
-      }
-    });
-
-    TT.Model.Column.add({
-      name: 'Passed QA',
-      active: false,
-      filter: function (story) {
-        return story.current_state === 'finished' && TT.Model.Story.hasTag(story, 'passedqa');
-      },
-      onDragIn: function (story) {
-        return {
-          current_state: 'finished',
-          labels: TT.Model.Story.addTag(story, 'passedqa').labels,
-          owned_by: story.owned_by || TT.Utils.getUsername(),
-          estimate: story.estimate || '0'
-        };
-      },
-      onDragOut: function (story) {
-        return { labels: TT.Model.Story.removeTag(story, 'passedqa').labels };
+        return { labels: TT.Model.Story.removeTag(story, 'in qa').labels };
       }
     });
 
     TT.Model.Column.add({
       name: 'Rejected',
-      active: false,
+      active: true,
       filter: function (story) {
         return story.current_state === 'rejected';
       },
@@ -181,27 +172,34 @@ TT.Init = (function () {
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
-      }
+      },
     });
 
+    // Story is in ready for Production.
     TT.Model.Column.add({
-      name: 'Delivered',
+      name: 'Ready for Prod',
       active: true,
       filter: function (story) {
-        return story.current_state === 'delivered';
+        return story.current_iteration === 0 &&
+               story.current_state === 'delivered' &&
+               TT.Model.Story.hasTag(story, 'ready for prod');
       },
       onDragIn: function (story) {
         return {
           current_state: 'delivered',
+          labels: TT.Model.Story.addTag(story, 'ready for prod').labels,
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
+      },
+      onDragOut: function (story) {
+        return { labels: TT.Model.Story.removeTag(story, 'ready for prod').labels };
       }
     });
 
     TT.Model.Column.add({
       name: 'Accepted',
-      active: true,
+      active: false,
       filter: function (story) {
         return story.current_state === 'accepted';
       },
@@ -255,6 +253,21 @@ TT.Init = (function () {
       active: false,
       filter: function (story) {
         return story.current_iteration === 0;
+      }
+    });
+
+    TT.Model.Column.add({
+      name: 'Delivered',
+      active: true,
+      filter: function (story) {
+        return story.current_state === 'delivered';
+      },
+      onDragIn: function (story) {
+        return {
+          current_state: 'delivered',
+          owned_by: story.owned_by || TT.Utils.getUsername(),
+          estimate: story.estimate || '0'
+        };
       }
     });
     */
