@@ -46,7 +46,7 @@ TT.Init = (function () {
     // Story is in Current and has not been started.
     TT.Model.Column.add({
       name: 'Unstarted',
-      active: true,
+      active: false,
       filter: function (story) {
         return story.current_iteration === 0 && (
           story.current_state === 'unstarted' || story.current_state === 'planned');
@@ -69,6 +69,28 @@ TT.Init = (function () {
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
+      }
+    });
+
+    // Story is in Current, finished, and needs code review.
+    TT.Model.Column.add({
+      name: 'Ready for CR',
+      active: true,
+      filter: function (story) {
+        return story.current_iteration === 0 &&
+               story.current_state === 'finished' &&
+               TT.Model.Story.hasTag(story, 'needs code review');
+      },
+      onDragIn: function (story) {
+        return {
+          current_state: 'finished',
+          labels: TT.Model.Story.addTag(story, 'needs code review').labels,
+          owned_by: story.owned_by || TT.Utils.getUsername(),
+          estimate: story.estimate || '0'
+        };
+      },
+      onDragOut: function (story) {
+        return { labels: TT.Model.Story.removeTag(story, 'needs code review').labels };
       }
     });
 
@@ -610,7 +632,6 @@ TT.Init = (function () {
   };
 
   return pub;
-
 }());
 
 // bind init to jQuery on DOM Ready
