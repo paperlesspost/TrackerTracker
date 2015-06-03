@@ -679,16 +679,6 @@ body.has-modal-dialog {
   margin: 6px 0 8px;
 }
 
-.story.blocked {
-  background-color: #D87F7F;
-  opacity: 0.75;
-}
-
-.story.blocked.expanded-story {
-  background-color: #eee;
-  opacity: 1.0;
-}
-
 .story:hover {
   background-color: #fff;
 }
@@ -1097,13 +1087,19 @@ body.has-modal-dialog {
 }
 
 .column-rejected .story,
-.story.rejected {
+.story.rejected,
+.story.blocked {
   background-color: #fdd;
 }
 
 .column-rejected .story:hover,
-.story.rejected:hover {
+.story.rejected:hover,
+.story.blocked:hover {
   background-color: #fee;
+}
+
+.story.blocked.expanded-story {
+  background-color: #eee;
 }
 
 .column-accepted .story,
