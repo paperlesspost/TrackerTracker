@@ -65,45 +65,45 @@ TT.Init = (function () {
 
     // Story is in Current, finished, and needs code review.
     TT.Model.Column.add({
-      name: 'Ready for CR',
+      name: 'Code Review',
       active: true,
       filter: function (story) {
         return story.current_iteration === 0 &&
                story.current_state === 'finished' &&
-               TT.Model.Story.hasTag(story, 'needs code review');
+               TT.Model.Story.hasTag(story, 'code review');
       },
       onDragIn: function (story) {
         return {
           current_state: 'finished',
-          labels: TT.Model.Story.addTag(story, 'needs code review').labels,
+          labels: TT.Model.Story.addTag(story, 'code review').labels,
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
       },
       onDragOut: function (story) {
-        return { labels: TT.Model.Story.removeTag(story, 'needs code review').labels };
+        return { labels: TT.Model.Story.removeTag(story, 'code review').labels };
       }
     });
 
     // Story is in Current, delivered, and needs design signoff.
     TT.Model.Column.add({
-      name: 'Ready for PD',
+      name: 'Stakeholder Review',
       active: true,
       filter: function (story) {
         return story.current_iteration === 0 &&
                story.current_state === 'delivered' &&
-               TT.Model.Story.hasTag(story, 'needs design signoff');
+               TT.Model.Story.hasTag(story, 'stakeholder review');
       },
       onDragIn: function (story) {
         return {
           current_state: 'delivered',
-          labels: TT.Model.Story.addTag(story, 'needs design signoff').labels,
+          labels: TT.Model.Story.addTag(story, 'stakeholder review').labels,
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
       },
       onDragOut: function (story) {
-        return { labels: TT.Model.Story.removeTag(story, 'needs design signoff').labels };
+        return { labels: TT.Model.Story.removeTag(story, 'stakeholder review').labels };
       }
     });
 
