@@ -426,8 +426,11 @@ TT.Init = (function () {
     });
     var savedLayout = TT.Model.Layout.clientLoad();
 
-    // reset when columns are updated
-    if (savedLayout && savedLayout.length !== defaultLayout.length) {
+    // Reset when columns are updated. Check for:
+    // (1) Unequal length of column layout.
+    // (2) Whether any fields changed via JSON representation.
+    if ((savedLayout && savedLayout.length !== defaultLayout.length) ||
+         JSON.stringify(defaultLayout) !== JSON.stringify(savedLayout)) {
       savedLayout = defaultLayout;
     }
 
