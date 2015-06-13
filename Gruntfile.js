@@ -107,6 +107,6 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'hogan', 'concat', 'uglify', 'fingerprint']);
-  grunt.registerTask('test', ['default', 'karma']);
+  grunt.registerTask('test', ['default']);
 
 };
