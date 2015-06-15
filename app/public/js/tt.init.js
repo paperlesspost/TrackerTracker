@@ -153,7 +153,7 @@ TT.Init = (function () {
 
     TT.Model.Column.add({
       name: 'Rejected',
-      active: true,
+      active: false,
       filter: function (story) {
         return story.current_state === 'rejected';
       },
@@ -163,6 +163,23 @@ TT.Init = (function () {
           owned_by: story.owned_by || TT.Utils.getUsername(),
           estimate: story.estimate || '0'
         };
+      }
+    });
+
+    // This column will be used to capture stories left in odd states.
+    TT.Model.Column.add({
+      name: 'Needs Triage',
+      active: false,
+      filter: function (story) {
+        // Stories have been kicked off staging (e.g. soul)
+        // that were previously in one of the QA states.
+        var qa_triage = story.current_iteration === 0 &&
+                        story.current_state === 'finished' && (
+                          TT.Model.Story.hasTag(story, 'ready for qa') ||
+                          TT.Model.Story.hasTag(story, 'in qa')
+                        );
+
+        return qa_triage;
       }
     });
 
