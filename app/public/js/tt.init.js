@@ -157,8 +157,12 @@ TT.Init = (function () {
       active: false,
       filter: function (story) {
         return story.current_iteration === 0 &&
-               story.current_state === 'delivered' &&
-               TT.Model.Story.hasTag(story, 'dev qa');
+               TT.Model.Story.hasTag(story, 'dev qa') &&
+               ((story.current_state === 'delivered') ||
+                (story.current_state === 'finished' &&
+                 !TT.Model.Story.hasTag(story, 'needs code review'))
+               );
+
       },
       onDragIn: function (story) {
         return {
